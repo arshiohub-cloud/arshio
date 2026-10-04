@@ -44,16 +44,22 @@ const htmlContent = `<!DOCTYPE html>
 </html>
 `;
 
+// 1. Write to dist/client/index.html
 fs.writeFileSync(path.join(clientDir, "index.html"), htmlContent, "utf-8");
 
+// 2. Write to project root index.html so Nitro uses compiled index.html as renderer template!
+fs.writeFileSync(path.resolve("index.html"), htmlContent, "utf-8");
+
+// 3. Write to .vercel/output/static/index.html if .vercel/output/static exists
 const vercelStaticDir = path.resolve(".vercel/output/static");
 if (fs.existsSync(vercelStaticDir)) {
   fs.writeFileSync(path.join(vercelStaticDir, "index.html"), htmlContent, "utf-8");
 }
 
+// 4. Write to .output/public/index.html if .output/public exists
 const outputPublicDir = path.resolve(".output/public");
 if (fs.existsSync(outputPublicDir)) {
   fs.writeFileSync(path.join(outputPublicDir, "index.html"), htmlContent, "utf-8");
 }
 
-console.log("Successfully generated production index.html with compiled assets!");
+console.log("Successfully updated root index.html and dist/client/index.html with compiled assets!");
