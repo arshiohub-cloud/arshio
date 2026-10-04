@@ -10,7 +10,6 @@ if (!fs.existsSync(assetsDir)) {
 }
 
 const files = fs.readdirSync(assetsDir);
-
 const cssFile = files.find((f) => f.endsWith(".css"));
 
 const indexJsFiles = files.filter((f) => f.startsWith("index-") && f.endsWith(".js"));
@@ -46,4 +45,15 @@ const htmlContent = `<!DOCTYPE html>
 `;
 
 fs.writeFileSync(path.join(clientDir, "index.html"), htmlContent, "utf-8");
-console.log("Successfully generated dist/client/index.html!");
+
+const vercelStaticDir = path.resolve(".vercel/output/static");
+if (fs.existsSync(vercelStaticDir)) {
+  fs.writeFileSync(path.join(vercelStaticDir, "index.html"), htmlContent, "utf-8");
+}
+
+const outputPublicDir = path.resolve(".output/public");
+if (fs.existsSync(outputPublicDir)) {
+  fs.writeFileSync(path.join(outputPublicDir, "index.html"), htmlContent, "utf-8");
+}
+
+console.log("Successfully generated production index.html with compiled assets!");
