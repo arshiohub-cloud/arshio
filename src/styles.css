@@ -1,0 +1,136 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-glass: var(--glass);
+  --font-sans: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+}
+
+:root {
+  --background: #070d1e;
+  --foreground: #ffffff;
+  --surface-1: rgba(11, 19, 43, 0.75);
+  --surface-2: rgba(19, 31, 55, 0.85);
+  --glass: rgba(39, 226, 196, 0.05);
+  --card: rgba(11, 19, 43, 0.8);
+  --card-foreground: #ffffff;
+  --popover: #0b132b;
+  --popover-foreground: #ffffff;
+  --primary: #27e2c4;
+  --primary-foreground: #070d1e;
+  --secondary: #131f37;
+  --secondary-foreground: #ffffff;
+  --muted: #131f37;
+  --muted-foreground: #94a3b8;
+  --accent: #27e2c4;
+  --accent-foreground: #070d1e;
+  --destructive: oklch(0.6 0.22 25);
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.12);
+  --ring: rgba(39, 226, 196, 0.4);
+}
+
+.dark {
+  --background: #070d1e;
+  --foreground: #ffffff;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html, body {
+    background-color: #070d1e;
+    color: #ffffff;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(90deg, #ffffff 0%, #27e2c4 50%, #38bdf8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .glass-card {
+    position: relative;
+    background: linear-gradient(145deg, rgba(11, 19, 43, 0.75), rgba(19, 31, 55, 0.85));
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 18px;
+    transition: transform 300ms ease, border-color 300ms ease, box-shadow 300ms ease;
+    overflow: hidden;
+  }
+  .glass-card:hover {
+    border-color: rgba(39, 226, 196, 0.5);
+    box-shadow: 0 0 35px rgba(39, 226, 196, 0.15);
+    transform: translateY(-3px);
+  }
+  .btn-primary {
+    background: #27e2c4;
+    color: #070d1e;
+    border-radius: 12px;
+    padding: 0.75rem 1.75rem;
+    font-weight: 700;
+    transition: all 300ms ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 20px rgba(39, 226, 196, 0.25);
+  }
+  .btn-primary:hover {
+    background: #1fd6b9;
+    transform: scale(1.03);
+    box-shadow: 0 0 30px rgba(39, 226, 196, 0.45);
+  }
+}
+
+@keyframes pulseSlow {
+  0%, 100% { transform: scale(1) translateY(0); opacity: 0.25; }
+  50% { transform: scale(1.1) translateY(-20px); opacity: 0.35; }
+}
+
+@keyframes driftSlow {
+  0%, 100% { transform: scale(1) translateX(0); opacity: 0.2; }
+  50% { transform: scale(1.15) translateX(30px); opacity: 0.3; }
+}
+
+.animate-pulse-slow {
+  animation: pulseSlow 12s ease-in-out infinite;
+}
+
+.animate-drift-slow {
+  animation: driftSlow 16s ease-in-out infinite;
+}
