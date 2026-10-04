@@ -24,8 +24,8 @@ function createSupabaseFetch(supabaseKey: string): typeof fetch {
   };
 }
 
-const DEFAULT_SUPABASE_URL = "https://esiimmzawviexrmqoptc.supabase.co";
-const DEFAULT_SUPABASE_KEY = "sb_publishable_h3W7QLKEwrvx76k1lXfzLw_oPb8bn7O";
+const DEFAULT_SUPABASE_URL = "https://crnxteiwdkruuwfhxkni.supabase.co";
+const DEFAULT_SUPABASE_KEY = "sb_publishable_ZNeggIeQ1nIpALrLfRId8g_HsIs88po";
 
 function createSupabaseClient() {
   const SUPABASE_URL =
