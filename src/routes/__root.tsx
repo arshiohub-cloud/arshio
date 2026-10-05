@@ -36,36 +36,34 @@ function NotFoundComponent() {
 }
 
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
-  console.error(error);
-  const router = useRouter();
+  console.error("Root Route Error:", error);
   useEffect(() => {
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-black px-4 text-white">
-      <div className="max-w-md text-center">
+    <div className="flex min-h-screen items-center justify-center bg-[#070d1e] px-4 text-white">
+      <div className="max-w-md text-center bg-[#0b132b] p-8 rounded-2xl border border-slate-800 shadow-2xl">
         <h1 className="text-2xl font-semibold tracking-tight text-white">
           Something went wrong
         </h1>
-        <p className="mt-2 text-sm text-zinc-400">
-          An unexpected error occurred. Please try refreshing or go back home.
+        <p className="mt-2 text-sm text-slate-400">
+          {error?.message || "An unexpected error occurred. Please try refreshing."}
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
           <button
             onClick={() => {
-              router.invalidate();
-              reset();
+              window.location.reload();
             }}
-            className="inline-flex items-center justify-center rounded-lg bg-cyan-500 px-5 py-2.5 text-sm font-semibold text-black transition-all hover:bg-cyan-400"
+            className="inline-flex items-center justify-center rounded-lg bg-[#27e2c4] px-5 py-2.5 text-sm font-bold text-slate-950 transition-all hover:bg-[#1fd6b9]"
           >
-            Try again
+            Refresh Page
           </button>
           <a
             href="/"
-            className="inline-flex items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900 px-5 py-2.5 text-sm font-medium text-white transition-all hover:bg-zinc-800"
+            className="inline-flex items-center justify-center rounded-lg border border-slate-700 bg-[#131f37] px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-slate-800"
           >
-            Go home
+            Go Home
           </a>
         </div>
       </div>
