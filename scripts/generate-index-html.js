@@ -12,17 +12,22 @@ if (!fs.existsSync(assetsDir)) {
 const files = fs.readdirSync(assetsDir);
 const cssFile = files.find((f) => f.endsWith(".css"));
 
+// Find all index-*.js files (both entry and vendor chunks)
 const indexJsFiles = files.filter((f) => f.startsWith("index-") && f.endsWith(".js"));
+
+// Sort smallest first so entry script loads, or include all index-*.js scripts
 indexJsFiles.sort((a, b) => {
   const sizeA = fs.statSync(path.join(assetsDir, a)).size;
   const sizeB = fs.statSync(path.join(assetsDir, b)).size;
-  return sizeB - sizeA;
+  return sizeA - sizeB; // Smallest first (entry script is usually smaller than vendor chunk)
 });
 
-const mainJsFile = indexJsFiles[0];
-
 console.log(`Main CSS: ${cssFile}`);
-console.log(`Main JS: ${mainJsFile}`);
+console.log(`Found JS Chunks: ${indexJsFiles.join(", ")}`);
+
+const jsTags = indexJsFiles
+  .map((f) => `<script type="module" src="/assets/${f}"></script>`)
+  .join("\n    ");
 
 const htmlContent = `<!DOCTYPE html>
 <html lang="en">
@@ -39,7 +44,7 @@ const htmlContent = `<!DOCTYPE html>
   </head>
   <body class="bg-[#070D1E] text-white antialiased">
     <div id="root"></div>
-    ${mainJsFile ? `<script type="module" src="/assets/${mainJsFile}"></script>` : ""}
+    ${jsTags}
   </body>
 </html>
 `;
@@ -56,10 +61,4 @@ if (fs.existsSync(vercelStaticDir)) {
   fs.writeFileSync(path.join(vercelStaticDir, "index.html"), htmlContent, "utf-8");
 }
 
-// 4. Write to .output/public/index.html if .output/public exists
-const outputPublicDir = path.resolve(".output/public");
-if (fs.existsSync(outputPublicDir)) {
-  fs.writeFileSync(path.join(outputPublicDir, "index.html"), htmlContent, "utf-8");
-}
-
-console.log("Successfully updated root index.html and dist/client/index.html with compiled assets!");
+console.log("Successfully updated index.html files with all compiled JS and CSS chunks!");
