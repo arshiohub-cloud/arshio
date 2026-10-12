@@ -1,131 +1,284 @@
-import { useEffect, useState } from "react";
-import { Sparkles, ArrowRight } from "lucide-react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
+import { ArrowRight, Play, ChevronDown } from "lucide-react";
+import { StatCounter } from "./StatCounter";
 
-const SERVICES_TYPEWRITER = [
-  { text: "UI/UX & Brand Design", icon: "🎨", color: "#27e2c4" },
-  { text: "Viral Video & Motion Reels", icon: "🎬", color: "#8b5cf6" },
-  { text: "High-Speed Web Applications", icon: "⚡", color: "#00e5b0" },
-  { text: "iOS & Android Mobile Apps", icon: "📱", color: "#38bdf8" },
-  { text: "Performance Marketing & Ads", icon: "🚀", color: "#3b82f6" },
+const ROTATING_WORDS = [
+  "UI/UX Design",
+  "Web Apps",
+  "Mobile Apps",
+  "Motion & Video",
+  "Growth Marketing",
 ];
 
-function useTypewriter(words: string[], typeMs = 65, holdMs = 1400, eraseMs = 30) {
-  const [i, setI] = useState(0);
-  const [text, setText] = useState("");
-  const [phase, setPhase] = useState<"type" | "hold" | "erase">("type");
+const HEADLINE_WORDS = ["Design-led", "digital", "products", "that", "scale", "your", "business."];
+
+/**
+ * Hero — Premium hero section with staggered headline reveal,
+ * rotating service word, floating UI mockup composition, and trust strip.
+ */
+export function Hero() {
+  const [wordIndex, setWordIndex] = useState(0);
+  const prefersReduced = useReducedMotion();
 
   useEffect(() => {
-    const word = words[i];
-    let t: ReturnType<typeof setTimeout>;
-    if (phase === "type") {
-      if (text.length < word.length) {
-        t = setTimeout(() => setText(word.slice(0, text.length + 1)), typeMs);
-      } else {
-        t = setTimeout(() => setPhase("erase"), holdMs);
-      }
-    } else if (phase === "erase") {
-      if (text.length > 0) {
-        t = setTimeout(() => setText(word.slice(0, text.length - 1)), eraseMs);
-      } else {
-        setI((n) => (n + 1) % words.length);
-        setPhase("type");
-      }
-    }
-    return () => clearTimeout(t!);
-  }, [text, phase, i, words, typeMs, holdMs, eraseMs]);
-
-  return { text, index: i };
-}
-
-export function Hero() {
-  const { text: typed, index: srvIdx } = useTypewriter(SERVICES_TYPEWRITER.map((s) => s.text));
-  const currentSrv = SERVICES_TYPEWRITER[srvIdx];
+    const interval = setInterval(() => {
+      setWordIndex((prev) => (prev + 1) % ROTATING_WORDS.length);
+    }, 2800);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <section className="relative min-h-[88vh] flex items-center justify-center overflow-hidden bg-[#070d1e] text-white py-20 border-b border-slate-800/80">
-      {/* Brand Ambient Glow Effects */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-b from-[#27e2c4]/15 via-[#131f37]/30 to-transparent blur-[140px] pointer-events-none rounded-full" />
-      <div className="absolute bottom-0 right-10 w-[400px] h-[400px] bg-[#27e2c4]/10 blur-[120px] pointer-events-none rounded-full" />
-
-      {/* Subtle Grid Overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b20_1px,transparent_1px),linear-gradient(to_bottom,#1e293b20_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
-
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center">
-        {/* Brand Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#27e2c4]/30 bg-[#27e2c4]/10 backdrop-blur-md text-xs font-semibold text-[#27e2c4] mb-8 shadow-lg shadow-[#27e2c4]/10">
-          <Sparkles className="w-4 h-4 text-[#27e2c4]" />
-          <span>All-in-One Creative & Digital Agency</span>
-        </div>
-
-        {/* Main Headline */}
-        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08]">
-          We Craft Digital Experiences That <br className="hidden sm:inline" />
-          <span className="bg-gradient-to-r from-[#27e2c4] via-[#5eead4] to-[#38bdf8] bg-clip-text text-transparent">
-            Scale Your Business Fast.
-          </span>
-        </h1>
-
-        {/* Dynamic Typewriter Pill */}
-        <div className="mt-8 flex items-center justify-center">
-          <div
-            className="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-[#0b132b]/90 border border-slate-800 shadow-2xl backdrop-blur-xl transition-all duration-300"
-            style={{ borderColor: `${currentSrv.color}66` }}
-          >
-            <span className="text-xs uppercase font-mono tracking-widest text-slate-400">
-              Specialized In:
-            </span>
-            <span className="text-xl leading-none">{currentSrv.icon}</span>
-            <span
-              className="text-base sm:text-xl font-bold font-mono text-transparent bg-clip-text"
-              style={{ backgroundImage: `linear-gradient(90deg, ${currentSrv.color}, #ffffff)` }}
+    <section className="relative min-h-screen flex flex-col justify-center pt-32 sm:pt-36 pb-16 px-6 sm:px-8">
+      <div className="mx-auto max-w-7xl w-full">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left: Copy */}
+          <div className="max-w-2xl">
+            {/* Badge */}
+            <motion.div
+              initial={prefersReduced ? {} : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
             >
-              {typed || "\u00A0"}
-            </span>
+              <span className="inline-flex items-center gap-2 rounded-full bg-[#2DE0C6]/8 border border-[#2DE0C6]/15 px-4 py-1.5 text-xs font-semibold text-[#2DE0C6] uppercase tracking-[0.15em] font-mono">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#2DE0C6] animate-pulse" />
+                Digital Agency
+              </span>
+            </motion.div>
+
+            {/* Headline — word-by-word stagger */}
+            <h1 className="hero-h1 mt-6">
+              {HEADLINE_WORDS.map((word, i) => (
+                <motion.span
+                  key={word}
+                  className="inline-block mr-[0.25em]"
+                  initial={prefersReduced ? {} : { opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.5,
+                    delay: 0.4 + i * 0.08,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </h1>
+
+            {/* Subline */}
+            <motion.p
+              className="mt-5 text-lg sm:text-xl text-white/60 leading-relaxed max-w-lg"
+              initial={prefersReduced ? {} : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 1.0 }}
+            >
+              We partner with ambitious teams to design, build, and grow{" "}
+              <span className="text-white/90 font-medium">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={wordIndex}
+                    className="inline-block text-[#2DE0C6]"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {ROTATING_WORDS[wordIndex]}
+                  </motion.span>
+                </AnimatePresence>
+              </span>{" "}
+              that deliver real results.
+            </motion.p>
+
+            {/* CTAs */}
+            <motion.div
+              className="mt-8 flex flex-wrap gap-4"
+              initial={prefersReduced ? {} : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 1.2 }}
+            >
+              <Link to="/contact" className="btn-primary text-base py-3.5 px-8">
+                Start Your Project
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                to="/portfolio"
+                className="btn-ghost text-base py-3.5 px-8"
+              >
+                <Play className="h-4 w-4" />
+                View Our Work
+              </Link>
+            </motion.div>
           </div>
-        </div>
 
-        {/* Subtitle */}
-        <p className="mt-6 text-base sm:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
-          From high-converting UI/UX design and viral video reels to full-stack web/mobile app development and data-driven marketing campaigns.
-        </p>
-
-        {/* CTA Buttons */}
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link
-            to="/contact"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-base font-bold text-slate-950 bg-[#27e2c4] hover:bg-[#1fd6b9] px-8 py-4 rounded-xl shadow-xl shadow-[#27e2c4]/25 transition-all hover:scale-105"
+          {/* Right: Floating UI Composition */}
+          <motion.div
+            className="relative hidden lg:flex items-center justify-center"
+            initial={prefersReduced ? {} : { opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
           >
-            Start Your Project <ArrowRight className="w-5 h-5" />
-          </Link>
-          <Link
-            to="/estimator"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-base font-semibold text-white bg-[#131f37] hover:bg-[#1a2948] border border-slate-800 px-7 py-4 rounded-xl transition-all"
-          >
-            Calculate Cost & Timeline
-          </Link>
+            <HeroVisual />
+          </motion.div>
         </div>
 
-        {/* Trust Badges & Stats */}
-        <div className="mt-16 pt-12 border-t border-slate-800/80 grid grid-cols-2 md:grid-cols-4 gap-6">
-          <div className="text-center">
-            <div className="text-3xl font-extrabold text-white">120+</div>
-            <div className="text-xs text-slate-400 mt-1 uppercase tracking-wider font-medium">Projects Delivered</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-extrabold text-[#27e2c4]">99.4%</div>
-            <div className="text-xs text-slate-400 mt-1 uppercase tracking-wider font-medium">Client Satisfaction</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-extrabold text-white">4.8M+</div>
-            <div className="text-xs text-slate-400 mt-1 uppercase tracking-wider font-medium">Video Views Generated</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-extrabold text-sky-400">3.5x</div>
-            <div className="text-xs text-slate-400 mt-1 uppercase tracking-wider font-medium">Average ROI Increase</div>
-          </div>
-        </div>
+        {/* Trust Strip: Stats */}
+        <motion.div
+          className="mt-20 lg:mt-24"
+          initial={prefersReduced ? {} : { opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.5 }}
+        >
+          <div className="section-divider mb-10" />
+          <StatCounter />
+        </motion.div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          className="mt-12 flex justify-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2, duration: 0.5 }}
+        >
+          <motion.button
+            onClick={() => {
+              document.getElementById("services")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="flex flex-col items-center gap-1 text-white/30 hover:text-white/50 transition-colors"
+            animate={{ y: [0, 6, 0] }}
+            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+            aria-label="Scroll to services"
+          >
+            <span className="text-xs font-mono uppercase tracking-widest">Scroll</span>
+            <ChevronDown className="h-4 w-4" />
+          </motion.button>
+        </motion.div>
       </div>
     </section>
+  );
+}
+
+/**
+ * HeroVisual — Floating composition of 3 code-drawn UI mockup cards
+ * with parallax-style gentle float animation.
+ */
+function HeroVisual() {
+  return (
+    <div className="relative w-full max-w-lg h-[440px]">
+      {/* Card 1: Dashboard */}
+      <motion.div
+        className="absolute top-0 right-0 w-72 glass-card p-0 overflow-hidden shadow-2xl"
+        animate={{ y: [0, -8, 0] }}
+        transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+      >
+        {/* Title bar */}
+        <div className="flex items-center gap-2 px-4 py-3 border-b border-white/5">
+          <div className="flex gap-1.5">
+            <span className="h-2.5 w-2.5 rounded-full bg-red-400/60" />
+            <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/60" />
+            <span className="h-2.5 w-2.5 rounded-full bg-green-400/60" />
+          </div>
+          <span className="text-[10px] font-mono text-white/30 ml-2">analytics-dashboard.app</span>
+        </div>
+        {/* Content mock */}
+        <div className="px-4 py-4 space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="text-xs text-white/50">Revenue</span>
+            <span className="text-sm font-bold text-[#2DE0C6]">+24.5%</span>
+          </div>
+          {/* Mini bar chart */}
+          <div className="flex items-end gap-1 h-16">
+            {[40, 65, 45, 80, 55, 90, 70, 95, 60, 85, 75, 100].map((h, i) => (
+              <div
+                key={i}
+                className="flex-1 rounded-sm bg-gradient-to-t from-[#2DE0C6]/40 to-[#22B8F0]/30"
+                style={{ height: `${h}%` }}
+              />
+            ))}
+          </div>
+          <div className="flex gap-4 text-[10px] text-white/30">
+            <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Card 2: Mobile App */}
+      <motion.div
+        className="absolute bottom-8 left-0 w-48 glass-card p-0 overflow-hidden shadow-2xl"
+        animate={{ y: [0, 10, 0] }}
+        transition={{ repeat: Infinity, duration: 7, ease: "easeInOut", delay: 0.5 }}
+      >
+        <div className="px-4 py-3 border-b border-white/5">
+          <span className="text-[10px] font-mono text-white/30">FitPulse \u2014 iOS</span>
+        </div>
+        <div className="px-4 py-4 space-y-3">
+          <div className="flex items-center gap-3">
+            <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-[#EC4899]/30 to-[#8B5CF6]/30 flex items-center justify-center">
+              <span className="text-lg">❤️</span>
+            </div>
+            <div>
+              <div className="text-xs font-medium text-white/80">Heart Rate</div>
+              <div className="text-lg font-bold text-[#EC4899]">72 BPM</div>
+            </div>
+          </div>
+          {/* Pulse line */}
+          <svg viewBox="0 0 160 40" className="w-full h-8 text-[#EC4899]/50">
+            <polyline
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              points="0,20 20,20 30,8 40,32 50,20 60,20 80,20 90,5 100,35 110,20 130,20 140,15 150,25 160,20"
+            />
+          </svg>
+        </div>
+      </motion.div>
+
+      {/* Card 3: Motion Timeline */}
+      <motion.div
+        className="absolute bottom-0 right-8 w-56 glass-card p-0 overflow-hidden shadow-2xl"
+        animate={{ y: [0, -6, 0] }}
+        transition={{ repeat: Infinity, duration: 8, ease: "easeInOut", delay: 1 }}
+      >
+        <div className="px-4 py-3 border-b border-white/5">
+          <span className="text-[10px] font-mono text-white/30">motion-timeline.ae</span>
+        </div>
+        <div className="px-4 py-3 space-y-2">
+          {/* Timeline tracks */}
+          {[
+            { label: "Text", color: "#2DE0C6", w: "80%" },
+            { label: "Video", color: "#22B8F0", w: "65%" },
+            { label: "Audio", color: "#8B5CF6", w: "90%" },
+            { label: "FX", color: "#F59E0B", w: "50%" },
+          ].map((track) => (
+            <div key={track.label} className="flex items-center gap-2">
+              <span className="text-[9px] font-mono text-white/30 w-8">{track.label}</span>
+              <div className="flex-1 h-3 rounded-sm bg-white/5 overflow-hidden">
+                <div
+                  className="h-full rounded-sm opacity-60"
+                  style={{
+                    width: track.w,
+                    background: `linear-gradient(90deg, ${track.color}80, ${track.color}40)`,
+                  }}
+                />
+              </div>
+            </div>
+          ))}
+          {/* Playhead */}
+          <div className="relative h-4 mt-1">
+            <div className="absolute left-[60%] top-0 bottom-0 w-[2px] bg-[#2DE0C6] rounded-full" />
+            <div className="absolute left-[60%] -top-1 -translate-x-1/2 h-2.5 w-2.5 rounded-full bg-[#2DE0C6] border-2 border-[#050A18]" />
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Ambient glow behind cards */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse 60% 50% at 60% 50%, rgba(45,224,198,0.08), transparent 70%)",
+        }}
+      />
+    </div>
   );
 }

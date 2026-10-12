@@ -1,131 +1,187 @@
-import { useEffect, useState } from "react";
-import { Menu, X, LayoutDashboard, Calculator, ArrowRight } from "lucide-react";
-import { Link } from "@tanstack/react-router";
-import { supabase } from "@/integrations/supabase/client";
+import { useState, useEffect } from "react";
+import { Link, useRouter } from "@tanstack/react-router";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, ArrowRight } from "lucide-react";
+import { NAV_LINKS } from "@/data/navigation";
 
-const links = [
-  { label: "Services", to: "/services" },
-  { label: "Portfolio", to: "/portfolio" },
-  { label: "Our Process", to: "/process" },
-  { label: "Pricing", to: "/pricing" },
-  { label: "About Us", to: "/about" },
-];
-
+/**
+ * Navbar — Floating glass nav that condenses on scroll.
+ * Includes announcement bar, navigation links, and CTAs.
+ */
 export function Navbar() {
-  const [mobile, setMobile] = useState(false);
-  const [signedIn, setSignedIn] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [announcementVisible, setAnnouncementVisible] = useState(true);
+  const router = useRouter();
+  const pathname = typeof window !== 'undefined' ? window.location.pathname : '/';
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => setSignedIn(!!data.session));
-    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => setSignedIn(!!session));
-    return () => sub.subscription.unsubscribe();
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
+
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-800/80 bg-[#070d1e]/95 backdrop-blur-xl transition-all">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-22 flex items-center justify-between">
-        {/* Official Arshio Brand Logo — Prominent & Sharp */}
-        <Link to="/" className="flex items-center group py-2">
-          <img
-            src="/arshio-logo.png"
-            alt="Arshio Creative Agency"
-            className="h-11 sm:h-12 md:h-13 w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-[0_0_12px_rgba(39,226,196,0.2)]"
-          />
+    <header className="fixed top-0 left-0 right-0 z-50">
+      {/* Announcement Bar */}
+      <AnimatePresence>
+        {announcementVisible && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="bg-gradient-to-r from-[#2DE0C6]/10 via-[#22B8F0]/10 to-[#5B5BF0]/10 border-b border-white/5 overflow-hidden"
+          >
+            <div className="flex items-center justify-center gap-3 px-4 py-2 text-xs sm:text-sm">
+              <span className="inline-flex items-center gap-1.5 text-white/70">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#2DE0C6] animate-pulse" />
+                Q4 slots open — <Link to="/contact" className="text-[#2DE0C6] hover:underline font-medium">book a free discovery audit</Link>
+              </span>
+              <button
+                onClick={() => setAnnouncementVisible(false)}
+                className="ml-2 text-white/40 hover:text-white/70 transition-colors"
+                aria-label="Dismiss announcement"
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Main Nav */}
+      <nav
+        className={`mx-auto mt-3 flex max-w-6xl items-center justify-between rounded-2xl px-4 sm:px-6 py-3 transition-all duration-500 ${
+          scrolled
+            ? "glass-nav-condensed shadow-lg shadow-black/20 mx-4 sm:mx-6 lg:mx-auto"
+            : "glass-nav mx-4 sm:mx-6 lg:mx-auto"
+        }`}
+        role="navigation"
+        aria-label="Main navigation"
+      >
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-2 group" aria-label="Arshio home">
+          <div className="relative">
+            <span className="text-2xl sm:text-[28px] font-extrabold font-display tracking-tight text-white">
+              arshio
+            </span>
+            <span className="absolute -bottom-0.5 left-0 h-[2px] w-full bg-gradient-to-r from-[#2DE0C6] to-transparent opacity-60 group-hover:opacity-100 transition-opacity" />
+          </div>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-1 bg-[#0b132b]/90 p-1.5 rounded-full border border-slate-800 shadow-inner">
-          {links.map((l) => (
-            <Link
-              key={l.label}
-              to={l.to}
-              className="px-4 py-2 text-sm font-semibold text-slate-300 hover:text-white rounded-full transition-all duration-200"
-              activeProps={{ className: "px-4 py-2 text-sm font-bold text-[#27e2c4] bg-[#131f37] border border-[#27e2c4]/40 shadow-sm" }}
-            >
-              {l.label}
-            </Link>
-          ))}
-        </nav>
+        {/* Desktop Links */}
+        <div className="hidden lg:flex items-center gap-1">
+          {NAV_LINKS.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                to={link.href}
+                className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                  isActive
+                    ? "text-[#2DE0C6]"
+                    : "text-white/70 hover:text-white hover:bg-white/5"
+                }`}
+              >
+                {link.label}
+                {isActive && (
+                  <motion.div
+                    layoutId="nav-indicator"
+                    className="absolute inset-0 rounded-lg bg-[#2DE0C6]/8 border border-[#2DE0C6]/20"
+                    transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
+                  />
+                )}
+              </Link>
+            );
+          })}
+        </div>
 
-        {/* Actions */}
+        {/* Desktop CTAs */}
         <div className="hidden lg:flex items-center gap-3">
           <Link
-            to="/estimator"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#27e2c4] hover:text-white px-3.5 py-2.5 rounded-xl border border-[#27e2c4]/30 bg-[#27e2c4]/10 hover:bg-[#27e2c4]/20 transition-all shadow-sm"
+            to="/pricing"
+            className="text-sm font-medium text-white/60 hover:text-[#2DE0C6] transition-colors"
           >
-            <Calculator className="w-3.5 h-3.5" /> Instant Quote
+            Get Instant Quote
           </Link>
-          {signedIn ? (
-            <Link
-              to="/app"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-200 hover:text-white px-4 py-2.5 rounded-xl border border-slate-800 bg-[#0b132b] hover:bg-[#131f37] transition-all"
-            >
-              <LayoutDashboard className="w-4 h-4 text-[#27e2c4]" /> Client Portal
-            </Link>
-          ) : (
-            <Link
-              to="/auth"
-              className="text-sm font-semibold text-slate-300 hover:text-white px-3 py-2 transition-colors"
-            >
-              Sign In
-            </Link>
-          )}
           <Link
             to="/contact"
-            className="inline-flex items-center justify-center gap-1.5 text-sm font-extrabold text-slate-950 bg-[#27e2c4] hover:bg-[#1fd6b9] px-5 py-2.5 rounded-xl shadow-lg shadow-[#27e2c4]/25 transition-all duration-200 hover:scale-105 active:scale-95"
+            className="btn-primary text-sm py-2 px-5"
           >
-            Start Project <ArrowRight className="w-4 h-4" />
+            Start a Project
+            <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
 
-        {/* Mobile menu button */}
+        {/* Mobile Menu Button */}
         <button
-          className="lg:hidden p-2.5 text-slate-300 hover:text-white rounded-xl bg-[#0b132b] border border-slate-800"
-          onClick={() => setMobile(!mobile)}
-          aria-label="Toggle Menu"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          className="lg:hidden flex items-center justify-center h-10 w-10 rounded-lg text-white/80 hover:bg-white/5 transition-colors"
+          aria-label="Toggle menu"
+          aria-expanded={mobileOpen}
         >
-          {mobile ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
-      </div>
+      </nav>
 
       {/* Mobile Menu */}
-      {mobile && (
-        <div className="lg:hidden border-t border-slate-800 bg-[#070d1e]/98 px-6 py-6 space-y-3">
-          {links.map((l) => (
-            <Link
-              key={l.label}
-              to={l.to}
-              onClick={() => setMobile(false)}
-              className="block text-base font-semibold text-slate-200 hover:text-[#27e2c4] py-2.5 border-b border-slate-800/60"
-            >
-              {l.label}
-            </Link>
-          ))}
-          <div className="pt-4 space-y-2.5">
-            <Link
-              to="/estimator"
-              onClick={() => setMobile(false)}
-              className="flex items-center justify-center gap-2 text-sm font-bold text-[#27e2c4] py-3 rounded-xl border border-[#27e2c4]/30 bg-[#27e2c4]/10"
-            >
-              <Calculator className="w-4 h-4" /> Instant Budget Estimator
-            </Link>
-            <Link
-              to={signedIn ? "/app" : "/auth"}
-              onClick={() => setMobile(false)}
-              className="flex items-center justify-center gap-2 text-sm font-semibold text-white py-3 rounded-xl border border-slate-800 bg-[#0b132b]"
-            >
-              {signedIn ? "Client Portal" : "Sign In to Client Portal"}
-            </Link>
-            <Link
-              to="/contact"
-              onClick={() => setMobile(false)}
-              className="flex items-center justify-center gap-2 text-sm font-extrabold text-slate-950 bg-[#27e2c4] py-3.5 rounded-xl shadow-lg"
-            >
-              Start Project <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-40 bg-[#050A18]/98 backdrop-blur-xl lg:hidden"
+            style={{ top: 0 }}
+          >
+            <div className="flex flex-col items-center justify-center min-h-screen gap-2 px-8">
+              {NAV_LINKS.map((link, i) => (
+                <motion.div
+                  key={link.href}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 + i * 0.06, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <Link
+                    to={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="block text-3xl font-bold font-display text-white/80 hover:text-[#2DE0C6] py-3 transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
+              ))}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.4 }}
+                className="mt-8"
+              >
+                <Link
+                  to="/contact"
+                  onClick={() => setMobileOpen(false)}
+                  className="btn-primary text-lg py-4 px-10"
+                >
+                  Start a Project
+                  <ArrowRight className="h-5 w-5" />
+                </Link>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

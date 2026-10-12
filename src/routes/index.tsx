@@ -1,25 +1,25 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { TopBar } from "@/components/site/TopBar";
 import { Navbar } from "@/components/site/Navbar";
 import { Hero } from "@/components/site/Hero";
+import { Marquee } from "@/components/site/Marquee";
 import { Services } from "@/components/site/Services";
-import { PortfolioShowcase } from "@/components/site/PortfolioShowcase";
-import { WhyChooseUs } from "@/components/site/WhyChooseUs";
-import { TestimonialsSection } from "@/components/site/TestimonialsSection";
-import { EstimatorSection } from "@/components/site/EstimatorSection";
-import { Process } from "@/components/site/Process";
-import { ContactForm } from "@/components/site/ContactForm";
+import { SelectedWork } from "@/components/site/SelectedWork";
+import { WhyArshio } from "@/components/site/WhyArshio";
+import { ProcessTimeline } from "@/components/site/ProcessTimeline";
+import { TestimonialSlider } from "@/components/site/TestimonialSlider";
+import { EstimatorTeaser } from "@/components/site/EstimatorTeaser";
+import { CTAContact } from "@/components/site/CTAContact";
 import { Footer } from "@/components/site/Footer";
-import { AmbientBackground } from "@/components/site/AmbientBackground";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/")(  {
   head: () => ({
     meta: [
-      { title: "Arshio Digital Agency — UI/UX, Video Editing, Custom ERP/Software & Web Apps" },
-      { name: "description", content: "Full-service digital agency specializing in UI/UX Design, Motion Video Reels, Custom Software, ERP/CRM, Web & Mobile Apps, and Performance Marketing." },
-      { property: "og:title", content: "Arshio Digital Agency — All-in-One Creative & Tech Agency" },
-      { property: "og:description", content: "UI/UX, Custom ERP/CRM, Video Editing, Web & Mobile App Development, Digital Marketing." },
+      { title: "Arshio — Design-Led Digital Products That Scale Your Business" },
+      { name: "description", content: "Full-service digital agency: UI/UX Design, Web & Mobile Apps, Video & Motion, Custom Software, Growth Marketing. Senior talent, transparent pricing, real results." },
+      { property: "og:title", content: "Arshio — Design-Led Digital Products" },
+      { property: "og:description", content: "UI/UX, Web Apps, Mobile, Video & Motion, Growth Marketing. Premium digital agency." },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://arshio.vercel.app" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
@@ -28,26 +28,21 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="relative min-h-screen bg-[#070d1e] text-white overflow-hidden">
-      {/* Universal Floating Ambient Mesh Gradient Aurora */}
-      <AmbientBackground />
-
-      {/* Main Content Wrapper */}
-      <div className="relative z-10">
-        <TopBar />
-        <Navbar />
-        <main>
-          <Hero />
-          <Services />
-          <PortfolioShowcase isPreview={true} />
-          <WhyChooseUs />
-          <TestimonialsSection />
-          <EstimatorSection />
-          <Process />
-          <ContactForm />
-        </main>
-        <Footer />
-      </div>
+    <div className="relative min-h-screen text-white">
+      {/* All sections are transparent — GlobalBackground in root handles the BG */}
+      <Navbar />
+      <main>
+        <Hero />
+        <Marquee />
+        <Services />
+        <SelectedWork />
+        <WhyArshio />
+        <ProcessTimeline />
+        <TestimonialSlider />
+        <EstimatorTeaser />
+        <CTAContact />
+      </main>
+      <Footer />
     </div>
   );
 }
