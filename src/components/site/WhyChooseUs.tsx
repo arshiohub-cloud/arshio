@@ -14,7 +14,7 @@ const DIFFERENTIATORS = [
   {
     icon: Award,
     title: "Fixed Transparent Pricing",
-    desc: "No surprise invoices or hourly bloat. Clear scope, instant cost estimator, and fixed project fees before we begin.",
+    desc: "No surprise invoices or hourly bloat. Clear scope document, upfront milestone pricing, and fixed project fees before we begin.",
   },
   {
     icon: Lock,

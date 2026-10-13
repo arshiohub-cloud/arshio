@@ -144,10 +144,10 @@ function ProcessPage() {
 
               <div className="mt-8 flex flex-wrap justify-center gap-4">
                 <Link
-                  to="/estimator"
+                  to="/pricing"
                   className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-slate-950 bg-[#27e2c4] hover:bg-[#1fd6b9] shadow-lg shadow-[#27e2c4]/20 transition-all hover:scale-105"
                 >
-                  Estimate Your Timeline & Cost <ArrowRight className="w-4 h-4" />
+                  View Pricing & Tiers <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
                   to="/contact"

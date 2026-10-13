@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu, X, LayoutDashboard, Calculator, ArrowRight } from "lucide-react";
+import { Menu, X, LayoutDashboard, Sparkles, ArrowRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -50,10 +50,10 @@ export function Navbar() {
         {/* Actions */}
         <div className="hidden lg:flex items-center gap-3">
           <Link
-            to="/estimator"
+            to="/pricing"
             className="inline-flex items-center gap-1.5 text-xs font-bold text-[#27e2c4] hover:text-white px-3.5 py-2.5 rounded-xl border border-[#27e2c4]/30 bg-[#27e2c4]/10 hover:bg-[#27e2c4]/20 transition-all shadow-sm"
           >
-            <Calculator className="w-3.5 h-3.5" /> Instant Quote
+            <Sparkles className="w-3.5 h-3.5" /> Pricing & Tiers
           </Link>
           {signedIn ? (
             <Link
@@ -103,11 +103,11 @@ export function Navbar() {
           ))}
           <div className="pt-4 space-y-2.5">
             <Link
-              to="/estimator"
+              to="/pricing"
               onClick={() => setMobile(false)}
               className="flex items-center justify-center gap-2 text-sm font-bold text-[#27e2c4] py-3 rounded-xl border border-[#27e2c4]/30 bg-[#27e2c4]/10"
             >
-              <Calculator className="w-4 h-4" /> Instant Budget Estimator
+              <Sparkles className="w-4 h-4" /> Pricing & Scope Guide
             </Link>
             <Link
               to={signedIn ? "/app" : "/auth"}

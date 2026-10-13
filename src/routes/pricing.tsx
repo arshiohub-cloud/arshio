@@ -48,8 +48,8 @@ const ENGAGEMENT_MODELS = [
       "99.2% On-Time SLA Guarantee",
       "30-Day Post-Launch Technical Support",
     ],
-    ctaText: "Estimate Project Cost",
-    ctaLink: "/estimator",
+    ctaText: "Request Project Proposal",
+    ctaLink: "/contact",
     highlight: true,
   },
   {
@@ -105,7 +105,7 @@ const PRICING_FAQS = [
   },
   {
     q: "Can I get a custom price for a smaller or larger project?",
-    a: "Absolutely! Use our interactive Cost Estimator below or book a free 30-minute discovery call to get a tailored scope document.",
+    a: "Absolutely! Explore our discipline scope guide below or book a free 30-minute discovery call to receive a tailored scope document within 24 hours.",
   },
 ];
 
@@ -206,21 +206,8 @@ function PricingPage() {
             </div>
           </section>
 
-          {/* Embedded Interactive Cost Estimator */}
-          <section className="relative">
-            <div className="text-center pt-16 pb-4">
-              <span className="text-xs font-mono font-bold text-[#27e2c4] bg-[#27e2c4]/10 px-3.5 py-1.5 rounded-full border border-[#27e2c4]/30 uppercase tracking-wider">
-                Custom Calculator
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-3">
-                Need a Custom Feature-Based Estimate?
-              </h2>
-              <p className="text-slate-400 text-sm mt-2 max-w-xl mx-auto">
-                Use our interactive cost & timeline estimator below to calculate your tailored budget in USD, BDT, or EUR.
-              </p>
-            </div>
-            <EstimatorSection />
-          </section>
+          {/* Transparent Scope & Investment Guide */}
+          <EstimatorSection />
 
           {/* Pricing FAQ Section */}
           <section className="py-24 bg-transparent border-b border-white/5">

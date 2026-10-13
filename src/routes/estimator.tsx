@@ -8,8 +8,8 @@ import { AmbientBackground } from "@/components/site/AmbientBackground";
 export const Route = createFileRoute("/estimator")({
   head: () => ({
     meta: [
-      { title: "Project Cost & Timeline Estimator — Arshio Digital Agency" },
-      { name: "description", content: "Calculate your instant project estimate for Custom ERP, UI/UX Design, Motion Reels, Web Development, and Mobile Apps." },
+      { title: "Scope & Investment Guide — Arshio Digital Agency" },
+      { name: "description", content: "Explore transparent project scope, timelines, and starting investments for Custom ERP Software, Web Development, Mobile Apps, and UI/UX." },
     ],
   }),
   component: EstimatorPage,

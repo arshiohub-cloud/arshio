@@ -99,10 +99,10 @@ export function Hero() {
             Start Your Project <ArrowRight className="w-5 h-5" />
           </Link>
           <Link
-            to="/estimator"
+            to="/pricing"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-base font-semibold text-white bg-[#131f37] hover:bg-[#1a2948] border border-slate-800 px-7 py-4 rounded-xl transition-all"
           >
-            Calculate Cost & Timeline
+            Explore Pricing & Tiers
           </Link>
         </div>
 
