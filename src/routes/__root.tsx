@@ -11,8 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { GlobalBackground } from "../components/site/GlobalBackground";
-import { ScrollProgress } from "../components/site/ScrollProgress";
+import { InteractiveLayer } from "../components/site/InteractiveLayer";
 
 function NotFoundComponent() {
   return (
@@ -77,11 +76,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Arshio — Design-Led Digital Products That Scale Your Business" },
-      { name: "description", content: "Full-service digital agency: UI/UX Design, Web & Mobile Apps, Video & Motion, Custom Software, Growth Marketing. Senior talent, transparent pricing, real results." },
-      { property: "og:site_name", content: "Arshio" },
+      { title: "Arshio Digital Agency — All-in-One Creative & Digital Agency" },
+      { name: "description", content: "Full-service digital agency specializing in UI/UX Design, Video Editing, Digital Marketing, Web Development, and Mobile Apps." },
+      { property: "og:site_name", content: "Arshio Digital Agency" },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://arshio.vercel.app" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
@@ -89,7 +87,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", type: "image/png", href: "/favicon.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Inter:wght@400;500;600;700;800&display=swap" },
     ],
   }),
 
@@ -122,8 +120,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <GlobalBackground />
-      <ScrollProgress />
+      <InteractiveLayer />
       <Outlet />
     </QueryClientProvider>
   );
