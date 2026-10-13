@@ -29,7 +29,7 @@ const steps = [
 
 export function Process() {
   return (
-    <section id="process" className="py-24 bg-[#070d1e] border-b border-slate-800/80 relative overflow-hidden">
+    <section id="process" className="py-24 bg-transparent border-b border-white/5 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#27e2c4]/30 bg-[#27e2c4]/10 text-[#27e2c4] text-xs font-semibold uppercase tracking-wider mb-4">

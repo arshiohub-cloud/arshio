@@ -22,7 +22,7 @@ export function Navbar() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-800/80 bg-[#070d1e]/95 backdrop-blur-xl transition-all">
+    <header className="sticky top-0 z-50 border-b border-white/5 bg-[#070d1e]/95 backdrop-blur-xl transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-22 flex items-center justify-between">
         {/* Official Arshio Brand Logo — Prominent & Sharp */}
         <Link to="/" className="flex items-center group py-2">

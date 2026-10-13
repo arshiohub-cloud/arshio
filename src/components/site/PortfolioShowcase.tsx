@@ -30,7 +30,7 @@ export function PortfolioShowcase({ isPreview = false }: { isPreview?: boolean }
   };
 
   return (
-    <section className="py-24 bg-[#0b132b]/60 border-b border-slate-800/80 relative overflow-hidden">
+    <section className="py-24 bg-transparent border-b border-white/5 relative overflow-hidden">
       {/* Background ambient lighting */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-[#27e2c4]/5 blur-[160px] rounded-full pointer-events-none" />
 
@@ -84,7 +84,7 @@ export function PortfolioShowcase({ isPreview = false }: { isPreview?: boolean }
             return (
               <div
                 key={item.id}
-                className="group relative bg-[#070d1e]/90 backdrop-blur-2xl rounded-3xl border border-slate-800/80 overflow-hidden hover:border-[#27e2c4]/40 transition-all duration-300 shadow-xl flex flex-col justify-between"
+                className="group relative bg-[#0b132b] rounded-3xl border border-slate-800/80 overflow-hidden hover:border-[#27e2c4]/40 transition-all duration-300 shadow-xl flex flex-col justify-between"
               >
                 {/* Media Container */}
                 <div className="relative aspect-video w-full overflow-hidden bg-[#131f37]">

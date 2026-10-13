@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 
 export function TopBar() {
   return (
-    <div className="w-full bg-[#0b132b] border-b border-slate-800/80 text-[12px] text-slate-300 py-2">
+    <div className="w-full bg-[#070d1e] border-b border-white/5 text-[12px] text-slate-300 py-2">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between gap-4 flex-wrap">
         {/* Left: Contact info */}
         <div className="hidden sm:flex items-center gap-6">

@@ -12,7 +12,7 @@ export function ContactForm() {
   return (
     <section
       id="contact"
-      className="relative py-24 bg-[#070d1e] border-b border-slate-800/80 overflow-hidden"
+      className="relative py-24 bg-transparent border-b border-white/5 overflow-hidden"
     >
       {/* Brand Ambient Glow */}
       <div

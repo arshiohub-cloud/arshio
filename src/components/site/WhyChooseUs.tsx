@@ -25,7 +25,7 @@ const DIFFERENTIATORS = [
 
 export function WhyChooseUs() {
   return (
-    <section className="py-24 bg-[#070d1e] border-b border-slate-800/80 relative overflow-hidden">
+    <section className="py-24 bg-transparent border-b border-white/5 relative overflow-hidden">
       {/* Background Glow */}
       <div className="absolute top-1/2 right-10 -translate-y-1/2 w-[500px] h-[500px] bg-[#27e2c4]/5 blur-[140px] rounded-full pointer-events-none" />
 

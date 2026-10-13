@@ -43,7 +43,7 @@ export function Hero() {
   const currentSrv = SERVICES_TYPEWRITER[srvIdx];
 
   return (
-    <section className="relative min-h-[88vh] flex items-center justify-center overflow-hidden bg-[#070d1e] text-white py-20 border-b border-slate-800/80">
+    <section className="relative min-h-[88vh] flex items-center justify-center overflow-hidden bg-transparent text-white py-20 border-b border-white/5">
       {/* Brand Ambient Glow Effects */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-b from-[#27e2c4]/15 via-[#131f37]/30 to-transparent blur-[140px] pointer-events-none rounded-full" />
       <div className="absolute bottom-0 right-10 w-[400px] h-[400px] bg-[#27e2c4]/10 blur-[120px] pointer-events-none rounded-full" />

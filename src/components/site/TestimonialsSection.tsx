@@ -50,7 +50,7 @@ const TESTIMONIALS: TestimonialItem[] = [
 
 export function TestimonialsSection() {
   return (
-    <section className="py-24 bg-[#0b132b] border-b border-slate-800/80 relative overflow-hidden">
+    <section className="py-24 bg-transparent border-b border-white/5 relative overflow-hidden">
       {/* Glow Effect */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-[#27e2c4]/5 blur-[150px] rounded-full pointer-events-none" />
 
@@ -71,7 +71,7 @@ export function TestimonialsSection() {
           {TESTIMONIALS.map((t) => (
             <div
               key={t.id}
-              className="bg-[#070d1e] rounded-2xl border border-slate-800/80 p-8 shadow-xl flex flex-col justify-between hover:border-[#27e2c4]/40 transition-all duration-300 group"
+              className="bg-[#0b132b] rounded-2xl border border-slate-800/80 p-8 shadow-xl flex flex-col justify-between hover:border-[#27e2c4]/40 transition-all duration-300 group"
             >
               <div>
                 {/* Rating & Highlight badge */}
