@@ -30,7 +30,7 @@ function ContactPage() {
 
         <main>
           {/* Page Hero */}
-          <section className="relative py-20 md:py-28 bg-[#070d1e] border-b border-slate-800/80 overflow-hidden text-center">
+          <section className="relative py-20 md:py-28 bg-transparent border-b border-white/5 overflow-hidden text-center">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#27e2c4]/30 bg-[#27e2c4]/10 text-[#27e2c4] text-xs font-semibold uppercase tracking-wider mb-6">
                 <Sparkles className="w-3.5 h-3.5" /> Fast 24-Hour Response Time
@@ -48,9 +48,9 @@ function ContactPage() {
           </section>
 
           {/* Contact Details Cards */}
-          <section className="py-12 bg-[#0b132b]/60 border-b border-slate-800/80">
+          <section className="py-12 bg-transparent border-b border-white/5">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 grid sm:grid-cols-3 gap-6">
-              <div className="bg-[#070d1e]/90 backdrop-blur-2xl rounded-2xl border border-slate-800/80 p-6 flex items-start gap-4 hover:border-[#27e2c4]/40 transition-all">
+              <div className="bg-[#0b132b] rounded-2xl border border-slate-800/80 p-6 flex items-start gap-4 hover:border-[#27e2c4]/40 transition-all">
                 <div className="w-12 h-12 rounded-xl bg-[#27e2c4]/10 border border-[#27e2c4]/30 flex items-center justify-center text-[#27e2c4] shrink-0">
                   <Mail className="w-6 h-6" />
                 </div>
@@ -61,7 +61,7 @@ function ContactPage() {
                 </div>
               </div>
 
-              <div className="bg-[#070d1e]/90 backdrop-blur-2xl rounded-2xl border border-slate-800/80 p-6 flex items-start gap-4 hover:border-[#27e2c4]/40 transition-all">
+              <div className="bg-[#0b132b] rounded-2xl border border-slate-800/80 p-6 flex items-start gap-4 hover:border-[#27e2c4]/40 transition-all">
                 <div className="w-12 h-12 rounded-xl bg-[#27e2c4]/10 border border-[#27e2c4]/30 flex items-center justify-center text-[#27e2c4] shrink-0">
                   <Phone className="w-6 h-6" />
                 </div>
@@ -72,7 +72,7 @@ function ContactPage() {
                 </div>
               </div>
 
-              <div className="bg-[#070d1e]/90 backdrop-blur-2xl rounded-2xl border border-slate-800/80 p-6 flex items-start gap-4 hover:border-[#27e2c4]/40 transition-all">
+              <div className="bg-[#0b132b] rounded-2xl border border-slate-800/80 p-6 flex items-start gap-4 hover:border-[#27e2c4]/40 transition-all">
                 <div className="w-12 h-12 rounded-xl bg-[#27e2c4]/10 border border-[#27e2c4]/30 flex items-center justify-center text-[#27e2c4] shrink-0">
                   <MapPin className="w-6 h-6" />
                 </div>

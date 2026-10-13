@@ -31,7 +31,7 @@ function PortfolioPage() {
 
         <main>
           {/* Page Hero */}
-          <section className="relative py-20 md:py-28 bg-[#070d1e] border-b border-slate-800/80 overflow-hidden text-center">
+          <section className="relative py-20 md:py-28 bg-transparent border-b border-white/5 overflow-hidden text-center">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#27e2c4]/30 bg-[#27e2c4]/10 text-[#27e2c4] text-xs font-semibold uppercase tracking-wider mb-6">
                 <Sparkles className="w-3.5 h-3.5" /> Proven Engineering & Creative Deliverables
@@ -47,7 +47,7 @@ function PortfolioPage() {
               </p>
 
               {/* Agency Stats Bar */}
-              <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 p-6 bg-[#0b132b]/80 backdrop-blur-xl rounded-2xl border border-slate-800 text-left">
+              <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 p-6 bg-[#0b132b] rounded-2xl border border-slate-800 text-left">
                 <div className="flex items-center gap-3.5">
                   <div className="w-10 h-10 rounded-xl bg-[#27e2c4]/10 border border-[#27e2c4]/30 flex items-center justify-center text-[#27e2c4] shrink-0">
                     <Award className="w-5 h-5" />

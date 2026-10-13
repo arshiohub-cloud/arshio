@@ -49,7 +49,7 @@ function ServicesPage() {
 
         <main>
           {/* Page Hero */}
-          <section className="relative py-20 md:py-28 bg-[#070d1e] border-b border-slate-800/80 overflow-hidden text-center">
+          <section className="relative py-20 md:py-28 bg-transparent border-b border-white/5 overflow-hidden text-center">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#27e2c4]/30 bg-[#27e2c4]/10 text-[#27e2c4] text-xs font-semibold uppercase tracking-wider mb-6">
                 <Sparkles className="w-3.5 h-3.5" /> Full-Spectrum Digital Capabilities
@@ -82,7 +82,7 @@ function ServicesPage() {
           </section>
 
           {/* Sticky Quick-Navigation Service Pills */}
-          <div className="sticky top-20 z-40 bg-[#070d1e]/90 backdrop-blur-xl border-b border-slate-800/80 py-3">
+          <div className="sticky top-20 z-40 bg-[#070d1e]/90 backdrop-blur-xl border-b border-white/5 py-3">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-start sm:justify-center gap-2 overflow-x-auto scrollbar-none">
               {SERVICES.map((s, idx) => (
                 <button
@@ -97,7 +97,7 @@ function ServicesPage() {
           </div>
 
           {/* Detailed Service Pillars Breakdown */}
-          <section className="py-24 bg-[#0b132b]/60 border-b border-slate-800/80">
+          <section className="py-24 bg-transparent border-b border-white/5">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-16">
               {SERVICES.map((s, idx) => {
                 const tools = SERVICE_TECH_STACK[s.slug] || [];
@@ -106,7 +106,7 @@ function ServicesPage() {
                   <div
                     key={s.slug}
                     id={s.slug}
-                    className="bg-[#070d1e]/90 backdrop-blur-2xl rounded-3xl border border-slate-800/80 p-8 sm:p-12 shadow-2xl relative overflow-hidden group hover:border-[#27e2c4]/40 transition-all duration-300 scroll-mt-36"
+                    className="bg-[#0b132b] rounded-3xl border border-slate-800/80 p-8 sm:p-12 shadow-2xl relative overflow-hidden group hover:border-[#27e2c4]/40 transition-all duration-300 scroll-mt-36"
                   >
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                       <div className="lg:col-span-7 space-y-6">

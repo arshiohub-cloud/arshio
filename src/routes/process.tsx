@@ -127,7 +127,7 @@ function ProcessPage() {
 
         <main>
           {/* Page Hero */}
-          <section className="relative py-20 md:py-28 bg-[#070d1e] border-b border-slate-800/80 overflow-hidden text-center">
+          <section className="relative py-20 md:py-28 bg-transparent border-b border-white/5 overflow-hidden text-center">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#27e2c4]/30 bg-[#27e2c4]/10 text-[#27e2c4] text-xs font-semibold uppercase tracking-wider mb-6">
                 <Sparkles className="w-3.5 h-3.5" /> Predictable, High-Speed Execution
@@ -160,7 +160,7 @@ function ProcessPage() {
           </section>
 
           {/* Interactive Step-by-Step Process Timeline */}
-          <section className="py-24 bg-[#0b132b]/60 border-b border-slate-800/80 relative">
+          <section className="py-24 bg-transparent border-b border-white/5 relative">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-12">
               {PROCESS_STEPS.map((s, idx) => {
                 const Icon = s.icon;
@@ -168,7 +168,7 @@ function ProcessPage() {
                 return (
                   <div
                     key={s.step}
-                    className="relative bg-[#070d1e]/90 backdrop-blur-2xl rounded-3xl border border-slate-800/80 p-8 sm:p-12 shadow-2xl overflow-hidden hover:border-[#27e2c4]/40 transition-all duration-300 group"
+                    className="relative bg-[#0b132b] rounded-3xl border border-slate-800/80 p-8 sm:p-12 shadow-2xl overflow-hidden hover:border-[#27e2c4]/40 transition-all duration-300 group"
                   >
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                       {/* Step Badge & Icon */}
@@ -246,7 +246,7 @@ function ProcessPage() {
           </section>
 
           {/* Process FAQ Section */}
-          <section className="py-24 bg-[#070d1e] border-b border-slate-800/80">
+          <section className="py-24 bg-transparent border-b border-white/5">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-8">
               <div className="text-center space-y-3">
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#27e2c4]/30 bg-[#27e2c4]/10 text-[#27e2c4] text-xs font-semibold uppercase tracking-wider">

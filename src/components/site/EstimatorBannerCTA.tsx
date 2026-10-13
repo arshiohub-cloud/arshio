@@ -3,7 +3,7 @@ import { Calculator, ArrowRight, Sparkles, ShieldCheck } from "lucide-react";
 
 export function EstimatorBannerCTA() {
   return (
-    <section className="py-16 bg-[#070d1e] border-b border-slate-800/80 relative overflow-hidden">
+    <section className="py-16 bg-transparent border-b border-white/5 relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="bg-gradient-to-r from-[#0b132b] via-[#131f37] to-[#0b132b] rounded-3xl border border-[#27e2c4]/40 p-8 sm:p-12 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 group hover:border-[#27e2c4]/60 transition-all">
           {/* Ambient Glow */}

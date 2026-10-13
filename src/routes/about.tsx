@@ -93,7 +93,7 @@ function AboutPage() {
 
         <main>
           {/* Page Hero */}
-          <section className="relative py-20 md:py-28 bg-[#070d1e] border-b border-slate-800/80 overflow-hidden text-center">
+          <section className="relative py-20 md:py-28 bg-transparent border-b border-white/5 overflow-hidden text-center">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#27e2c4]/30 bg-[#27e2c4]/10 text-[#27e2c4] text-xs font-semibold uppercase tracking-wider mb-6">
                 <Sparkles className="w-3.5 h-3.5" /> Human Craftsmanship & Precision Engineering
@@ -109,7 +109,7 @@ function AboutPage() {
               </p>
 
               {/* Stats Bar */}
-              <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 p-6 bg-[#0b132b]/80 backdrop-blur-xl rounded-2xl border border-slate-800 text-left">
+              <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 p-6 bg-[#0b132b] rounded-2xl border border-slate-800 text-left">
                 <div>
                   <div className="text-3xl font-black text-[#27e2c4]">50+</div>
                   <div className="text-xs text-slate-400 font-semibold uppercase mt-1">Projects Delivered</div>
@@ -131,7 +131,7 @@ function AboutPage() {
           </section>
 
           {/* Core Values Section */}
-          <section className="py-24 bg-[#0b132b]/60 border-b border-slate-800/80">
+          <section className="py-24 bg-transparent border-b border-white/5">
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
               <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#27e2c4]/30 bg-[#27e2c4]/10 text-[#27e2c4] text-xs font-semibold uppercase tracking-wider">
@@ -151,7 +151,7 @@ function AboutPage() {
                   return (
                     <div
                       key={v.title}
-                      className="bg-[#070d1e]/90 backdrop-blur-2xl rounded-3xl border border-slate-800/80 p-8 shadow-xl hover:border-[#27e2c4]/40 transition-all duration-300 space-y-4 group"
+                      className="bg-[#0b132b] rounded-3xl border border-slate-800/80 p-8 shadow-xl hover:border-[#27e2c4]/40 transition-all duration-300 space-y-4 group"
                     >
                       <div className="w-14 h-14 rounded-2xl bg-[#27e2c4]/10 border border-[#27e2c4]/30 flex items-center justify-center text-[#27e2c4] group-hover:scale-110 transition-transform">
                         <Icon className="w-7 h-7" />
@@ -170,7 +170,7 @@ function AboutPage() {
           </section>
 
           {/* Core Team & Engineering Capabilities */}
-          <section className="py-24 bg-[#070d1e] border-b border-slate-800/80">
+          <section className="py-24 bg-transparent border-b border-white/5">
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
               <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#27e2c4]/30 bg-[#27e2c4]/10 text-[#27e2c4] text-xs font-semibold uppercase tracking-wider">
@@ -190,7 +190,7 @@ function AboutPage() {
                   return (
                     <div
                       key={t.role}
-                      className="bg-[#0b132b]/80 backdrop-blur-2xl rounded-3xl border border-slate-800/80 p-8 shadow-xl space-y-6 hover:border-[#27e2c4]/40 transition-all"
+                      className="bg-[#0b132b] rounded-3xl border border-slate-800/80 p-8 shadow-xl space-y-6 hover:border-[#27e2c4]/40 transition-all"
                     >
                       <div className="flex items-center gap-4">
                         <div className="w-12 h-12 rounded-xl bg-[#27e2c4]/10 border border-[#27e2c4]/30 flex items-center justify-center text-[#27e2c4]">
