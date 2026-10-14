@@ -3,6 +3,7 @@ import { ArrowRight, Mail, Phone, MapPin, Linkedin, Instagram, Youtube, Globe } 
 import { NAV_LINKS, SOCIAL_LINKS } from "@/data/navigation";
 import { SERVICES } from "@/data/services";
 import { Reveal } from "./Reveal";
+import { useSiteSettings } from "@/lib/cms-store";
 
 const iconMap: Record<string, typeof Globe> = {
   linkedin: Linkedin,
@@ -15,6 +16,7 @@ const iconMap: Record<string, typeof Globe> = {
  * Footer — Multi-column glass footer with newsletter, links, and giant wordmark.
  */
 export function Footer() {
+  const [settings] = useSiteSettings();
   return (
     <footer className="relative mt-0 overflow-hidden">
       {/* Top divider */}
@@ -100,19 +102,19 @@ export function Footer() {
               <ul className="space-y-3">
                 <li className="flex items-start gap-2 text-sm text-white/50">
                   <Mail className="h-4 w-4 mt-0.5 text-[#2DE0C6]/60 shrink-0" />
-                  <a href="mailto:hello@arshio.agency" className="hover:text-[#2DE0C6] transition-colors">
-                    hello@arshio.agency
+                  <a href={`mailto:${settings.email}`} className="hover:text-[#2DE0C6] transition-colors">
+                    {settings.email}
                   </a>
                 </li>
                 <li className="flex items-start gap-2 text-sm text-white/50">
                   <Phone className="h-4 w-4 mt-0.5 text-[#2DE0C6]/60 shrink-0" />
-                  <a href="tel:+8801700000000" className="hover:text-[#2DE0C6] transition-colors">
-                    +880 1700-000-000
+                  <a href={`tel:${settings.phone}`} className="hover:text-[#2DE0C6] transition-colors">
+                    {settings.phone}
                   </a>
                 </li>
                 <li className="flex items-start gap-2 text-sm text-white/50">
                   <MapPin className="h-4 w-4 mt-0.5 text-[#2DE0C6]/60 shrink-0" />
-                  <span>Dhaka, Bangladesh</span>
+                  <span>{settings.address}</span>
                 </li>
               </ul>
               {/* Social Icons */}

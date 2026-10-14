@@ -5,6 +5,7 @@ import { Footer } from "@/components/site/Footer";
 import { ContactForm } from "@/components/site/ContactForm";
 import { AmbientBackground } from "@/components/site/AmbientBackground";
 import { Sparkles, Mail, Phone, MapPin, MessageSquare, Clock, ShieldCheck } from "lucide-react";
+import { useSiteSettings } from "@/lib/cms-store";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -19,6 +20,8 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactPage() {
+  const [settings] = useSiteSettings();
+
   return (
     <div className="relative min-h-screen bg-[#070d1e] text-white overflow-hidden">
       {/* Universal Floating Ambient Mesh Gradient Aurora */}
@@ -33,7 +36,7 @@ function ContactPage() {
           <section className="relative py-20 md:py-28 bg-transparent border-b border-white/5 overflow-hidden text-center">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#27e2c4]/30 bg-[#27e2c4]/10 text-[#27e2c4] text-xs font-semibold uppercase tracking-wider mb-6">
-                <Sparkles className="w-3.5 h-3.5" /> Fast 24-Hour Response Time
+                <Sparkles className="w-3.5 h-3.5" /> {settings.responseTimeSLA || "Fast 24-Hour Response Time"}
               </div>
               <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
                 Let's Build Something <br />
@@ -56,7 +59,9 @@ function ContactPage() {
                 </div>
                 <div>
                   <div className="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider">Email Us Directly</div>
-                  <div className="text-base font-bold text-white mt-1">hello@arshio.com</div>
+                  <a href={`mailto:${settings.email}`} className="text-base font-bold text-white mt-1 hover:text-[#27e2c4] transition block">
+                    {settings.email}
+                  </a>
                   <div className="text-xs text-[#27e2c4] mt-0.5">Response within 4 hours</div>
                 </div>
               </div>
@@ -67,7 +72,9 @@ function ContactPage() {
                 </div>
                 <div>
                   <div className="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider">Call or WhatsApp</div>
-                  <div className="text-base font-bold text-white mt-1">+880 1700-000000</div>
+                  <a href={`tel:${settings.phone}`} className="text-base font-bold text-white mt-1 hover:text-[#27e2c4] transition block">
+                    {settings.phone}
+                  </a>
                   <div className="text-xs text-[#27e2c4] mt-0.5">Mon–Fri, 9am – 8pm</div>
                 </div>
               </div>
@@ -78,7 +85,7 @@ function ContactPage() {
                 </div>
                 <div>
                   <div className="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider">Global Locations</div>
-                  <div className="text-base font-bold text-white mt-1">Dhaka & New York</div>
+                  <div className="text-base font-bold text-white mt-1">{settings.address}</div>
                   <div className="text-xs text-slate-400 mt-0.5">Remote & In-Person Strategy</div>
                 </div>
               </div>

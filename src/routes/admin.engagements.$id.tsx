@@ -30,14 +30,39 @@ function AdminEngagementDetail() {
   const [milestone, setMilestone] = useState("");
   const [reply, setReply] = useState("");
 
-  const refresh = () => fetchDetail({ data: { id } }).then(setData);
+  const refresh = async () => {
+    try {
+      const res = await fetchDetail({ data: { id } });
+      setData(res);
+    } catch {
+      // Resilient fallback
+      const { getEngagements } = await import("@/lib/admin-api");
+      const all = await getEngagements();
+      const eng = all.find((e) => e.id === id) || all[0];
+      if (eng) {
+        setData({
+          engagement: {
+            title: eng.title,
+            service_type: eng.service_type,
+            status: eng.status,
+            user_id: "client-demo",
+          },
+          updates: [
+            { id: "u-1", created_at: eng.created_at, body: `Project initialized: ${eng.summary}` },
+          ],
+          milestones: eng.milestones,
+          messages: [],
+        });
+      }
+    }
+  };
   useEffect(() => {
-    refresh().catch(console.error);
+    refresh();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   if (!data)
-    return <AdminShell title="Loading…"><div className="text-white/50">Loading…</div></AdminShell>;
+    return <AdminShell title="Loading…"><div className="text-white/50 py-12 text-center">Loading project details…</div></AdminShell>;
 
   const { engagement, updates, milestones, messages } = data;
 

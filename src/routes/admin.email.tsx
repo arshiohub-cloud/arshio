@@ -19,7 +19,7 @@ type EmailSearch = { to?: string; name?: string; context?: string };
 export const Route = createFileRoute("/admin/email")({
   head: () => ({
     meta: [
-      { title: "Email — InsightAI Admin" },
+      { title: "Email & Follow-Ups — Arshio Studio Admin" },
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),
@@ -52,38 +52,38 @@ const TEMPLATES: Template[] = [
   {
     id: "follow-up",
     name: "Lead Follow-Up",
-    subject: "Following up on your inquiry with InsightAI",
-    body: "Hi {name},\n\nThanks for reaching out to InsightAI Consultancy. I've reviewed your message and would love to schedule a 30-minute call to discuss how our AI services can help {company}.\n\nDo any of these times work?\n- Tomorrow 2pm ET\n- Thursday 10am ET\n\nBest,\nThe InsightAI Team",
+    subject: "Following up on your project inquiry with Arshio Agency",
+    body: "Hi {name},\n\nThanks for reaching out to Arshio Digital Agency. I've reviewed your project requirements and would love to schedule a 30-minute discovery call to discuss scope, timeline, and architecture.\n\nDo any of these times work?\n- Tomorrow 2:00 PM\n- Thursday 11:00 AM\n\nBest,\nArshio Team\nhello@arshio.agency",
   },
   {
     id: "audit-confirm",
-    name: "Audit Confirmation",
-    subject: "Your AI Audit is confirmed",
-    body: "Hi {name},\n\nYour complimentary 30-minute AI Audit is confirmed. We'll walk through your workflows, identify top AI opportunities, and deliver a quick-win roadmap on the call.\n\nSee you soon,\nThe InsightAI Team",
+    name: "Discovery Call Confirmation",
+    subject: "Your project discovery session is confirmed",
+    body: "Hi {name},\n\nYour discovery session with Arshio Digital Agency is confirmed. We will review your goals, discuss architecture, and provide a transparent milestone roadmap.\n\nLooking forward to speaking with you.\n\nBest,\nArshio Creative & Engineering Team",
   },
   {
     id: "proposal",
-    name: "Proposal Ready",
-    subject: "Your custom AI proposal is ready",
-    body: "Hi {name},\n\nAttached is the custom AI implementation proposal for {company}. Happy to walk through it live — reply with a time that works.\n\nThe InsightAI Team",
+    name: "Proposal & Technical Blueprint",
+    subject: "Project proposal & technical blueprint ready — {company}",
+    body: "Hi {name},\n\nAttached is the customized technical blueprint and scope proposal for {company}. It covers deliverables, weekly sprint milestones, and pricing.\n\nLet us know when you'd like to do a quick review.\n\nBest,\nArshio Studio",
   },
   {
     id: "project-update",
-    name: "Project Update",
-    subject: "Weekly project update — {project}",
-    body: "Hi {name},\n\nQuick update on {project}:\n\n• Milestone 1 complete\n• Model accuracy: 96%\n• Next: production rollout\n\nQuestions? Just reply.\n\nThe InsightAI Team",
+    name: "Weekly Sprint Update",
+    subject: "Weekly sprint update — {project}",
+    body: "Hi {name},\n\nHere is your weekly progress update on {project}:\n\n• Milestone completed\n• Staging build updated for testing\n• Next sprint: production QA & final review\n\nFeel free to test the staging link and share feedback.\n\nBest,\nArshio Engineering Team",
   },
   {
     id: "launch",
-    name: "Launch Announcement",
-    subject: "🚀 Your AI system is live",
-    body: "Hi {name},\n\n{project} is now live in production. Dashboard access, docs, and support channel details are attached.\n\nThe InsightAI Team",
+    name: "Production Launch",
+    subject: "🚀 {project} is officially live in production!",
+    body: "Hi {name},\n\nCongratulations! {project} has successfully passed all QA checks and is now deployed live in production. 100% source code, assets, and documentation credentials have been handed over.\n\nThank you for choosing Arshio.\n\nBest,\nThe Arshio Team",
   },
   {
     id: "retainer",
     name: "Retainer Check-in",
-    subject: "Monthly check-in from InsightAI",
-    body: "Hi {name},\n\nQuick monthly retainer check-in — any new AI initiatives, model tuning needs, or workflows you'd like us to explore?\n\nThe InsightAI Team",
+    subject: "Monthly check-in from Arshio Agency",
+    body: "Hi {name},\n\nQuick monthly check-in on how everything is performing. Let us know if you'd like to plan upcoming feature sprints, motion campaigns, or performance optimizations.\n\nBest,\nArshio Studio",
   },
 ];
 
@@ -219,11 +219,11 @@ function Compose({ template, prefill }: { template: Template; prefill?: EmailSea
   const subjectFn = useServerFn(suggestSubjects);
   const [to, setTo] = useState(prefill?.to ?? "");
   const [subject, setSubject] = useState(
-    prefill?.name ? `Re: your inquiry with InsightAI` : template.subject,
+    prefill?.name ? `Re: your inquiry with Arshio Agency` : template.subject,
   );
   const [body, setBody] = useState(
     prefill?.name
-      ? `Hi ${prefill.name.split(" ")[0]},\n\nThanks for reaching out to InsightAI Consultancy. Regarding your note:\n\n> ${(prefill.context ?? "").slice(0, 400)}\n\n`
+      ? `Hi ${prefill.name.split(" ")[0]},\n\nThanks for reaching out to Arshio Digital Agency. Regarding your project inquiry:\n\n> ${(prefill.context ?? "").slice(0, 400)}\n\n`
       : template.body,
   );
   const [goal, setGoal] = useState(

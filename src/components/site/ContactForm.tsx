@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Check, Send, Sparkles } from "lucide-react";
 import { useFadeIn } from "@/hooks/use-fade-in";
-import { supabase } from "@/integrations/supabase/client";
+import { submitLead } from "@/lib/admin-api";
 
 export function ContactForm() {
   const [sent, setSent] = useState(false);
@@ -80,21 +80,23 @@ export function ContactForm() {
               typeof window !== "undefined"
                 ? window.location.pathname
                 : "/contact";
-            const { error } = await supabase.from("leads").insert({
-              name: `${first} ${last}`.trim() || "Anonymous",
-              email,
-              phone: phone || null,
-              message,
-              type: "contact",
-              source_page: source,
-            });
-            setSubmitting(false);
-            if (error) {
+            
+            try {
+              await submitLead({
+                name: `${first} ${last}`.trim() || "Anonymous",
+                email,
+                phone: phone || null,
+                message,
+                source_page: source,
+                type: "contact",
+              });
+              setSent(true);
+              (e.target as HTMLFormElement).reset();
+            } catch {
               setErrorMsg("Something went wrong. Please try again.");
-              return;
+            } finally {
+              setSubmitting(false);
             }
-            setSent(true);
-            (e.target as HTMLFormElement).reset();
           }}
 
           className="relative p-5 sm:p-8 space-y-4 sm:space-y-5 rounded-2xl bg-[#0b132b] border border-slate-800/80 shadow-2xl"
