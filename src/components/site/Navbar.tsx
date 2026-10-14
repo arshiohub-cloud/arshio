@@ -6,9 +6,9 @@ import { supabase } from "@/integrations/supabase/client";
 const links = [
   { label: "Services", to: "/services" },
   { label: "Portfolio", to: "/portfolio" },
-  { label: "Our Process", to: "/process" },
+  { label: "Process", to: "/process" },
   { label: "Pricing", to: "/pricing" },
-  { label: "About Us", to: "/about" },
+  { label: "About", to: "/about" },
 ];
 
 export function Navbar() {
@@ -35,9 +35,9 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/5 bg-[#070d1e]/95 backdrop-blur-xl transition-all">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 grid grid-cols-2 lg:grid-cols-3 items-center">
-        {/* Col 1: Official Arshio Brand Logo */}
-        <div className="justify-self-start">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between gap-4">
+        {/* Left: Official Arshio Brand Logo */}
+        <div className="flex-1 flex items-center justify-start">
           <Link to="/" className="flex items-center group py-2" aria-label="Arshio Home">
             <img
               src="/arshio-logo.png"
@@ -47,15 +47,15 @@ export function Navbar() {
           </Link>
         </div>
 
-        {/* Col 2: Desktop Navigation (Centered) */}
-        <nav className="hidden lg:flex justify-self-center items-center gap-1 bg-[#0b132b]/90 p-1.5 rounded-full border border-slate-800 shadow-inner">
+        {/* Center: Desktop Navigation (Single-line Pill, Centered, Never Wraps) */}
+        <nav className="hidden lg:flex shrink-0 items-center gap-1 bg-[#0b132b]/90 p-1.5 rounded-full border border-slate-800 shadow-inner">
           {links.map((l) => (
             <Link
               key={l.label}
               to={l.to}
-              className="px-4 py-2 text-sm font-semibold text-slate-300 hover:text-white rounded-full transition-all duration-200"
+              className="whitespace-nowrap px-4 py-2 text-sm font-semibold text-slate-300 hover:text-white rounded-full transition-all duration-200"
               activeProps={{
-                className: "px-4 py-2 text-sm font-bold text-[#27e2c4] bg-[#131f37] border border-[#27e2c4]/40 shadow-sm",
+                className: "whitespace-nowrap px-4 py-2 text-sm font-bold text-[#27e2c4] bg-[#131f37] border border-[#27e2c4]/40 shadow-sm",
               }}
             >
               {l.label}
@@ -63,26 +63,26 @@ export function Navbar() {
           ))}
         </nav>
 
-        {/* Col 3: Desktop CTA Action (Right-Aligned) */}
-        <div className="hidden lg:flex justify-self-end items-center gap-3">
+        {/* Right: Desktop CTA Action (Right-Aligned, Balanced) */}
+        <div className="hidden lg:flex flex-1 items-center justify-end gap-3">
           {signedIn && (
             <Link
               to="/app"
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-white px-3 py-2 rounded-xl border border-slate-800 bg-[#0b132b] hover:bg-[#131f37] transition-all"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-white px-3 py-2 rounded-xl border border-slate-800 bg-[#0b132b] hover:bg-[#131f37] transition-all whitespace-nowrap"
             >
               <LayoutDashboard className="w-3.5 h-3.5 text-[#27e2c4]" /> Portal
             </Link>
           )}
           <Link
             to="/contact"
-            className="inline-flex items-center justify-center gap-2 text-sm font-extrabold text-slate-950 bg-[#27e2c4] hover:bg-[#1fd6b9] px-6 py-2.5 rounded-full shadow-lg shadow-[#27e2c4]/25 transition-all duration-200 hover:scale-105 active:scale-95"
+            className="inline-flex items-center justify-center gap-2 text-sm font-extrabold text-slate-950 bg-[#27e2c4] hover:bg-[#1fd6b9] px-6 py-2.5 rounded-full shadow-lg shadow-[#27e2c4]/25 transition-all duration-200 hover:scale-105 active:scale-95 whitespace-nowrap"
           >
             Start Project <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
         {/* Mobile menu trigger */}
-        <div className="lg:hidden justify-self-end">
+        <div className="lg:hidden">
           <button
             className="p-2.5 text-slate-300 hover:text-white rounded-xl bg-[#0b132b] border border-slate-800 cursor-pointer"
             onClick={() => setMobile(!mobile)}
