@@ -47,7 +47,7 @@ function PortfolioPage() {
               </p>
 
               {/* Agency Stats Bar */}
-              <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 p-6 bg-[#0b132b] rounded-2xl border border-slate-800 text-left">
+              <div className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 p-4 sm:p-6 bg-[#0b132b] rounded-2xl border border-slate-800 text-left">
                 <div className="flex items-center gap-3.5">
                   <div className="w-10 h-10 rounded-xl bg-[#27e2c4]/10 border border-[#27e2c4]/30 flex items-center justify-center text-[#27e2c4] shrink-0">
                     <Award className="w-5 h-5" />

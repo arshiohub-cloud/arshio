@@ -21,15 +21,27 @@ export function Navbar() {
     return () => sub.subscription.unsubscribe();
   }, []);
 
+  // Prevent background scroll when mobile menu is active
+  useEffect(() => {
+    if (mobile) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobile]);
+
   return (
     <header className="sticky top-0 z-50 border-b border-white/5 bg-[#070d1e]/95 backdrop-blur-xl transition-all">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-22 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
         {/* Official Arshio Brand Logo — Prominent & Sharp */}
         <Link to="/" className="flex items-center group py-2">
           <img
             src="/arshio-logo.png"
             alt="Arshio Creative Agency"
-            className="h-11 sm:h-12 md:h-13 w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-[0_0_12px_rgba(39,226,196,0.2)]"
+            className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-[0_0_12px_rgba(39,226,196,0.2)]"
           />
         </Link>
 
@@ -40,14 +52,16 @@ export function Navbar() {
               key={l.label}
               to={l.to}
               className="px-4 py-2 text-sm font-semibold text-slate-300 hover:text-white rounded-full transition-all duration-200"
-              activeProps={{ className: "px-4 py-2 text-sm font-bold text-[#27e2c4] bg-[#131f37] border border-[#27e2c4]/40 shadow-sm" }}
+              activeProps={{
+                className: "px-4 py-2 text-sm font-bold text-[#27e2c4] bg-[#131f37] border border-[#27e2c4]/40 shadow-sm",
+              }}
             >
               {l.label}
             </Link>
           ))}
         </nav>
 
-        {/* Actions */}
+        {/* Desktop Actions */}
         <div className="hidden lg:flex items-center gap-3">
           <Link
             to="/pricing"
@@ -80,28 +94,29 @@ export function Navbar() {
 
         {/* Mobile menu button */}
         <button
-          className="lg:hidden p-2.5 text-slate-300 hover:text-white rounded-xl bg-[#0b132b] border border-slate-800"
+          className="lg:hidden p-2.5 text-slate-300 hover:text-white rounded-xl bg-[#0b132b] border border-slate-800 cursor-pointer"
           onClick={() => setMobile(!mobile)}
-          aria-label="Toggle Menu"
+          aria-label={mobile ? "Close Menu" : "Open Menu"}
         >
           {mobile ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu with max-height and scrolling */}
       {mobile && (
-        <div className="lg:hidden border-t border-slate-800 bg-[#070d1e]/98 px-6 py-6 space-y-3">
+        <div className="lg:hidden border-t border-slate-800 bg-[#070d1e]/98 backdrop-blur-2xl px-5 sm:px-6 py-5 space-y-3 max-h-[calc(100vh-5rem)] overflow-y-auto">
           {links.map((l) => (
             <Link
               key={l.label}
               to={l.to}
               onClick={() => setMobile(false)}
-              className="block text-base font-semibold text-slate-200 hover:text-[#27e2c4] py-2.5 border-b border-slate-800/60"
+              className="block text-base font-semibold text-slate-200 hover:text-[#27e2c4] py-3 border-b border-slate-800/60 transition-colors"
+              activeProps={{ className: "text-[#27e2c4] font-bold" }}
             >
               {l.label}
             </Link>
           ))}
-          <div className="pt-4 space-y-2.5">
+          <div className="pt-3 space-y-2.5">
             <Link
               to="/pricing"
               onClick={() => setMobile(false)}

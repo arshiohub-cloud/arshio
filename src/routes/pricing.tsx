@@ -144,9 +144,9 @@ function PricingPage() {
               {ENGAGEMENT_MODELS.map((m) => (
                 <div
                   key={m.title}
-                  className={`relative rounded-3xl p-8 sm:p-10 flex flex-col justify-between transition-all duration-300 ${
+                  className={`relative rounded-3xl p-6 sm:p-10 flex flex-col justify-between transition-all duration-300 ${
                     m.highlight
-                      ? "bg-gradient-to-b from-[#0b132b] via-[#070d1e] to-[#070d1e] border-2 border-[#27e2c4] shadow-2xl shadow-[#27e2c4]/15 scale-105"
+                      ? "bg-gradient-to-b from-[#0b132b] via-[#070d1e] to-[#070d1e] border-2 border-[#27e2c4] shadow-2xl shadow-[#27e2c4]/15 lg:scale-105"
                       : "bg-[#0b132b] border border-slate-800/80 hover:border-[#27e2c4]/40"
                   }`}
                 >

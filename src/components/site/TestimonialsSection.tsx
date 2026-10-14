@@ -67,11 +67,11 @@ export function TestimonialsSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {TESTIMONIALS.map((t) => (
             <div
               key={t.id}
-              className="bg-[#0b132b] rounded-2xl border border-slate-800/80 p-8 shadow-xl flex flex-col justify-between hover:border-[#27e2c4]/40 transition-all duration-300 group"
+              className="bg-[#0b132b] rounded-2xl border border-slate-800/80 p-5 sm:p-8 shadow-xl flex flex-col justify-between hover:border-[#27e2c4]/40 transition-all duration-300 group"
             >
               <div>
                 {/* Rating & Highlight badge */}

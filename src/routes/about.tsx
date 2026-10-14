@@ -109,7 +109,7 @@ function AboutPage() {
               </p>
 
               {/* Stats Bar */}
-              <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 p-6 bg-[#0b132b] rounded-2xl border border-slate-800 text-left">
+              <div className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 p-4 sm:p-6 bg-[#0b132b] rounded-2xl border border-slate-800 text-left">
                 <div>
                   <div className="text-3xl font-black text-[#27e2c4]">50+</div>
                   <div className="text-xs text-slate-400 font-semibold uppercase mt-1">Projects Delivered</div>

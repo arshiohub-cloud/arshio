@@ -97,11 +97,11 @@ export function ContactForm() {
             (e.target as HTMLFormElement).reset();
           }}
 
-          className="relative p-8 space-y-5 rounded-2xl bg-[#0b132b] border border-slate-800/80 shadow-2xl"
+          className="relative p-5 sm:p-8 space-y-4 sm:space-y-5 rounded-2xl bg-[#0b132b] border border-slate-800/80 shadow-2xl"
         >
-          <div className="text-xl font-bold text-white mb-2">Send Us a Message</div>
+          <div className="text-lg sm:text-xl font-bold text-white mb-2">Send Us a Message</div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <Input name="firstName" placeholder="First Name" />
             <Input name="lastName" placeholder="Last Name" />
           </div>

@@ -71,7 +71,7 @@ function ServiceCard({
         style={{ background: brandAccent }}
       />
 
-      <div className="relative p-7 sm:p-8 flex-1 flex flex-col justify-between">
+      <div className="relative p-5 sm:p-8 flex-1 flex flex-col justify-between">
         <div>
           <div className="flex items-start justify-between gap-4 mb-6">
             <div

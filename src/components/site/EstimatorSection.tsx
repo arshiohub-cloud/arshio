@@ -160,7 +160,7 @@ export function EstimatorSection() {
         </div>
 
         {/* Focal Scope & Investment Card */}
-        <div className="bg-[#0b132b] rounded-3xl border border-slate-800/80 p-8 sm:p-12 shadow-2xl relative overflow-hidden group hover:border-[#27e2c4]/40 transition-all duration-300 mb-12">
+        <div className="bg-[#0b132b] rounded-3xl border border-slate-800/80 p-5 sm:p-8 lg:p-12 shadow-2xl relative overflow-hidden group hover:border-[#27e2c4]/40 transition-all duration-300 mb-12">
           {/* Ambient Glow */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-[#27e2c4]/5 blur-[120px] rounded-full pointer-events-none" />
 
@@ -220,7 +220,7 @@ export function EstimatorSection() {
             </div>
 
             {/* Right: Pricing Box & Fast Action */}
-            <div className="lg:col-span-5 flex flex-col justify-between h-full bg-[#070d1e]/80 rounded-2xl border border-slate-800 p-8 space-y-6">
+            <div className="lg:col-span-5 flex flex-col justify-between h-full bg-[#070d1e]/80 rounded-2xl border border-slate-800 p-5 sm:p-8 space-y-6">
               <div className="space-y-4">
                 <div className="text-xs font-mono uppercase tracking-wider text-slate-400">
                   Typical Project Investment

@@ -168,7 +168,7 @@ function ProcessPage() {
                 return (
                   <div
                     key={s.step}
-                    className="relative bg-[#0b132b] rounded-3xl border border-slate-800/80 p-8 sm:p-12 shadow-2xl overflow-hidden hover:border-[#27e2c4]/40 transition-all duration-300 group"
+                    className="relative bg-[#0b132b] rounded-3xl border border-slate-800/80 p-5 sm:p-8 lg:p-12 shadow-2xl overflow-hidden hover:border-[#27e2c4]/40 transition-all duration-300 group"
                   >
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                       {/* Step Badge & Icon */}
@@ -222,7 +222,7 @@ function ProcessPage() {
               })}
 
               {/* Free 30-Minute Discovery Call Bonus Card */}
-              <div className="bg-gradient-to-r from-[#27e2c4]/15 via-[#0b132b] to-[#38bdf8]/15 rounded-3xl border border-[#27e2c4]/40 p-8 sm:p-10 shadow-2xl relative overflow-hidden flex flex-col sm:flex-row items-center justify-between gap-6">
+              <div className="bg-gradient-to-r from-[#27e2c4]/15 via-[#0b132b] to-[#38bdf8]/15 rounded-3xl border border-[#27e2c4]/40 p-5 sm:p-10 shadow-2xl relative overflow-hidden flex flex-col sm:flex-row items-center justify-between gap-6">
                 <div className="space-y-2 text-center sm:text-left">
                   <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#27e2c4]/20 text-[#27e2c4] text-xs font-bold uppercase tracking-wider">
                     <Gift className="w-3.5 h-3.5" /> Step 00 — Zero Risk Strategy Session

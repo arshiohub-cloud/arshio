@@ -45,11 +45,11 @@ export function WhyChooseUs() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {DIFFERENTIATORS.map((d, i) => (
             <div
               key={i}
-              className="bg-[#0b132b] rounded-2xl border border-slate-800/80 p-7 hover:border-[#27e2c4]/40 transition-all duration-300 shadow-xl group"
+              className="bg-[#0b132b] rounded-2xl border border-slate-800/80 p-5 sm:p-7 hover:border-[#27e2c4]/40 transition-all duration-300 shadow-xl group"
             >
               <div className="w-12 h-12 rounded-xl bg-[#27e2c4]/10 border border-[#27e2c4]/30 flex items-center justify-center text-[#27e2c4] mb-6 group-hover:scale-110 transition-transform">
                 <d.icon className="w-6 h-6" />

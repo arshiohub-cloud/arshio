@@ -196,7 +196,7 @@ function CareersPage() {
                   <AccordionItem
                     key={pos.id}
                     value={pos.id}
-                    className="bg-[#0b132b]/90 border border-slate-800/80 rounded-3xl px-8 py-4 transition-colors"
+                    className="bg-[#0b132b]/90 border border-slate-800/80 rounded-2xl sm:rounded-3xl px-4 sm:px-8 py-3 sm:py-4 transition-colors"
                   >
                     <AccordionTrigger className="hover:no-underline py-4 text-left">
                       <div className="space-y-2">

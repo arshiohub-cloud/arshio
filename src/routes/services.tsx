@@ -106,7 +106,7 @@ function ServicesPage() {
                   <div
                     key={s.slug}
                     id={s.slug}
-                    className="bg-[#0b132b] rounded-3xl border border-slate-800/80 p-8 sm:p-12 shadow-2xl relative overflow-hidden group hover:border-[#27e2c4]/40 transition-all duration-300 scroll-mt-36"
+                    className="bg-[#0b132b] rounded-3xl border border-slate-800/80 p-5 sm:p-8 lg:p-12 shadow-2xl relative overflow-hidden group hover:border-[#27e2c4]/40 transition-all duration-300 scroll-mt-36"
                   >
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                       <div className="lg:col-span-7 space-y-6">

@@ -43,11 +43,11 @@ export function Process() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {steps.map((s, idx) => (
             <div
               key={s.num}
-              className="bg-[#0b132b] rounded-2xl border border-slate-800/80 p-7 hover:border-[#27e2c4]/40 transition-all duration-300 shadow-xl relative group flex flex-col justify-between"
+              className="bg-[#0b132b] rounded-2xl border border-slate-800/80 p-5 sm:p-7 hover:border-[#27e2c4]/40 transition-all duration-300 shadow-xl relative group flex flex-col justify-between"
             >
               <div className="flex items-center justify-between mb-6">
                 <div className="w-12 h-12 rounded-xl bg-[#27e2c4]/10 border border-[#27e2c4]/30 flex items-center justify-center text-[#27e2c4] group-hover:scale-110 transition-transform">

@@ -50,7 +50,7 @@ function ContactPage() {
           {/* Contact Details Cards */}
           <section className="py-12 bg-transparent border-b border-white/5">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 grid sm:grid-cols-3 gap-6">
-              <div className="bg-[#0b132b] rounded-2xl border border-slate-800/80 p-6 flex items-start gap-4 hover:border-[#27e2c4]/40 transition-all">
+              <div className="bg-[#0b132b] rounded-2xl border border-slate-800/80 p-4 sm:p-6 flex items-start gap-3 sm:gap-4 hover:border-[#27e2c4]/40 transition-all">
                 <div className="w-12 h-12 rounded-xl bg-[#27e2c4]/10 border border-[#27e2c4]/30 flex items-center justify-center text-[#27e2c4] shrink-0">
                   <Mail className="w-6 h-6" />
                 </div>
@@ -61,7 +61,7 @@ function ContactPage() {
                 </div>
               </div>
 
-              <div className="bg-[#0b132b] rounded-2xl border border-slate-800/80 p-6 flex items-start gap-4 hover:border-[#27e2c4]/40 transition-all">
+              <div className="bg-[#0b132b] rounded-2xl border border-slate-800/80 p-4 sm:p-6 flex items-start gap-3 sm:gap-4 hover:border-[#27e2c4]/40 transition-all">
                 <div className="w-12 h-12 rounded-xl bg-[#27e2c4]/10 border border-[#27e2c4]/30 flex items-center justify-center text-[#27e2c4] shrink-0">
                   <Phone className="w-6 h-6" />
                 </div>
@@ -72,7 +72,7 @@ function ContactPage() {
                 </div>
               </div>
 
-              <div className="bg-[#0b132b] rounded-2xl border border-slate-800/80 p-6 flex items-start gap-4 hover:border-[#27e2c4]/40 transition-all">
+              <div className="bg-[#0b132b] rounded-2xl border border-slate-800/80 p-4 sm:p-6 flex items-start gap-3 sm:gap-4 hover:border-[#27e2c4]/40 transition-all">
                 <div className="w-12 h-12 rounded-xl bg-[#27e2c4]/10 border border-[#27e2c4]/30 flex items-center justify-center text-[#27e2c4] shrink-0">
                   <MapPin className="w-6 h-6" />
                 </div>
