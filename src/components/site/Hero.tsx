@@ -245,7 +245,7 @@ export function Hero() {
             </div>
 
             {/* Cinematic Visual Stage Display with Cross-Fade */}
-            <div className="relative aspect-[16/10] sm:aspect-[21/10] lg:aspect-[2.2/1] overflow-hidden group">
+            <div className="relative min-h-[440px] sm:min-h-0 sm:aspect-[21/10] lg:aspect-[2.2/1] overflow-hidden group">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeProject.id}
@@ -261,7 +261,7 @@ export function Hero() {
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   {/* Subtle Cinematic Vignette Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#070d1e] via-[#070d1e]/50 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#070d1e] via-[#070d1e]/60 to-transparent" />
                   <div className="absolute inset-0 bg-gradient-to-r from-[#070d1e]/80 via-transparent to-transparent hidden sm:block" />
 
                   {/* Visual Floating Info Overlay */}
@@ -278,7 +278,7 @@ export function Hero() {
                       </div>
 
                       {/* Project Headline */}
-                      <h3 className="text-xl sm:text-3xl font-extrabold text-white font-display tracking-tight leading-snug drop-shadow-md">
+                      <h3 className="text-lg sm:text-3xl font-extrabold text-white font-display tracking-tight leading-snug drop-shadow-md">
                         {activeProject.title}
                       </h3>
 
@@ -288,9 +288,9 @@ export function Hero() {
                       </p>
 
                       {/* Outcome & Action Footer */}
-                      <div className="mt-4 flex items-center gap-4 flex-wrap">
+                      <div className="mt-4 flex items-center gap-3 sm:gap-4 flex-wrap">
                         {/* Primary Impact Chip */}
-                        <div className="inline-flex items-center gap-2 bg-[#070d1e]/95 border border-slate-700/80 px-3.5 py-2 rounded-xl backdrop-blur-md shadow-lg">
+                        <div className="inline-flex items-center gap-2 bg-[#070d1e]/95 border border-slate-700/80 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl backdrop-blur-md shadow-lg">
                           <CheckCircle2 className="w-4 h-4 text-[#27e2c4] shrink-0" />
                           <div className="text-left">
                             <span className="text-sm sm:text-base font-extrabold text-[#27e2c4] font-display">
@@ -303,14 +303,14 @@ export function Hero() {
                         </div>
 
                         {/* Secondary Metric */}
-                        <span className="text-xs font-mono text-slate-300 bg-black/40 px-3 py-2 rounded-xl border border-white/5 backdrop-blur-md hidden md:inline-block">
+                        <span className="text-xs font-mono text-slate-300 bg-black/40 px-3 py-1.5 sm:py-2 rounded-xl border border-white/5 backdrop-blur-md hidden md:inline-block">
                           {activeProject.secondaryMetric}
                         </span>
 
                         {/* View Case Study CTA Link */}
                         <Link
                           to="/portfolio"
-                          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-white hover:text-[#27e2c4] bg-white/10 hover:bg-white/15 px-4 py-2 rounded-xl border border-white/10 backdrop-blur-md transition-all group/link"
+                          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-white hover:text-[#27e2c4] bg-white/10 hover:bg-white/15 px-3.5 py-2 rounded-xl border border-white/10 backdrop-blur-md transition-all group/link"
                         >
                           <span>Explore Case Study</span>
                           <ArrowUpRight className="w-4 h-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
@@ -350,25 +350,25 @@ export function Hero() {
           </div>
 
           {/* Right: Clean, Crisp Inline Outcomes */}
-          <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-7 text-xs font-mono text-slate-300 pt-2 lg:pt-0">
-            <div className="flex items-center gap-1.5">
-              <span className="text-sm font-extrabold text-white font-display">$14M+</span>
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center gap-4 sm:gap-7 text-xs font-mono text-slate-300 pt-2 lg:pt-0">
+            <div className="flex items-center gap-1.5 justify-center sm:justify-start">
+              <span className="text-sm sm:text-base font-extrabold text-white font-display">$14M+</span>
               <span className="text-slate-400">GMV Driven</span>
             </div>
             <span className="text-slate-700 hidden sm:inline">•</span>
-            <div className="flex items-center gap-1.5">
-              <span className="text-sm font-extrabold text-white font-display">50+</span>
-              <span className="text-slate-400">Products Shipped</span>
+            <div className="flex items-center gap-1.5 justify-center sm:justify-start">
+              <span className="text-sm sm:text-base font-extrabold text-white font-display">50+</span>
+              <span className="text-slate-400">Shipped</span>
             </div>
             <span className="text-slate-700 hidden sm:inline">•</span>
-            <div className="flex items-center gap-1.5">
-              <span className="text-sm font-extrabold text-[#27e2c4] font-display">4.9/5</span>
-              <span className="text-slate-400">Client Rating</span>
+            <div className="flex items-center gap-1.5 justify-center sm:justify-start">
+              <span className="text-sm sm:text-base font-extrabold text-[#27e2c4] font-display">4.9/5</span>
+              <span className="text-slate-400">Rating</span>
             </div>
             <span className="text-slate-700 hidden sm:inline">•</span>
-            <div className="flex items-center gap-1.5">
-              <span className="text-sm font-extrabold text-sky-400 font-display">100%</span>
-              <span className="text-slate-400">IP Ownership</span>
+            <div className="flex items-center gap-1.5 justify-center sm:justify-start">
+              <span className="text-sm sm:text-base font-extrabold text-sky-400 font-display">100%</span>
+              <span className="text-slate-400">IP Owned</span>
             </div>
           </div>
         </motion.div>

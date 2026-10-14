@@ -87,11 +87,11 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
     linkUrl: "/contact",
   },
   hero: {
-    badge: "SENIOR FULL-CYCLE DIGITAL STUDIO",
-    title: "Design-Led Digital Products That",
-    titleAccent: "Scale Your Business Fast.",
+    badge: "NEXT-GEN TECH & CREATIVE STUDIO",
+    title: "One Dedicated Studio for All Your",
+    titleAccent: "Tech & Marketing Needs.",
     subtitle:
-      "We engineer bespoke ERP software, high-converting web applications, mobile apps, and viral motion reels. Senior talent, fixed sprint pricing, zero agency fluff.",
+      "Transforming ideas into high-performing web platforms, intuitive user interfaces, and scalable marketing funnels. Fast sprints, senior execution, guaranteed momentum.",
     primaryBtnText: "Start Your Project",
     primaryBtnLink: "/contact",
     secondaryBtnText: "Explore Case Studies",
@@ -130,7 +130,7 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   },
 };
 
-const STORAGE_KEY = "arshio_site_cms_settings_v2";
+const STORAGE_KEY = "arshio_site_cms_settings_v3";
 
 // In-memory cache + listeners for multi-component reactivity
 let currentSettings: SiteSettings = { ...DEFAULT_SITE_SETTINGS };
