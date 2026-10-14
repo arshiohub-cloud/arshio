@@ -1,34 +1,51 @@
 import os
 from PIL import Image, ImageDraw, ImageFont
 
-def generate_all():
-    W, H = 1200, 630
+def get_white_monogram():
+    orig = Image.open('public/arshio-logo-original.png')
+    content = orig.crop((230, 192, 817, 367))
+    monogram = content.crop((0, 0, 203, content.height))
+    bbox = monogram.getbbox()
+    cropped = monogram.crop(bbox).convert('RGBA')
     
-    # Load white monogram
-    mono = Image.open('public/test-white-mono.png')
+    w, h = cropped.size
+    white_mono = Image.new('RGBA', (w, h), (0, 0, 0, 0))
+    for y in range(h):
+        for x in range(w):
+            r, g, b, a = cropped.getpixel((x, y))
+            if a > 0:
+                if g > 140 and b > 140 and r < 100:
+                    white_mono.putpixel((x, y), (39, 226, 196, a))
+                else:
+                    white_mono.putpixel((x, y), (255, 255, 255, a))
+    return white_mono
+
+def generate_og_image():
+    W, H = 1200, 630
+    mono = get_white_monogram()
 
     # 1. Base Dark Canvas
-    canvas = Image.new('RGBA', (W, H), (5, 10, 24, 255)) # #050A18
+    canvas = Image.new('RGBA', (W, H), (7, 13, 30, 255)) # #070D1E
 
     # 2. Ambient Glows
     glow = Image.new('RGBA', (W, H), (0, 0, 0, 0))
     dglow = ImageDraw.Draw(glow)
 
     # Teal glow around card on right
-    cx1, cy1, r1 = 920, 260, 390
+    cx1, cy1, r1 = 960, 280, 420
     for r in range(r1, 0, -6):
         alpha = int(45 * (1.0 - (r / r1)**1.8))
         dglow.ellipse([(cx1 - r, cy1 - r), (cx1 + r, cy1 + r)], fill=(39, 226, 196, alpha))
 
-    # Cyan/Indigo glow at bottom left
-    cx2, cy2, r2 = 220, 520, 380
+    # Cyan glow at bottom left
+    cx2, cy2, r2 = 240, 520, 380
     for r in range(r2, 0, -6):
-        alpha = int(32 * (1.0 - (r / r2)**1.8))
+        alpha = int(35 * (1.0 - (r / r2)**1.8))
         dglow.ellipse([(cx2 - r, cy2 - r), (cx2 + r, cy2 + r)], fill=(34, 184, 240, alpha))
 
     canvas = Image.alpha_composite(canvas, glow)
 
-    # 3. Subtle Grid Lines
+    # 3. Modern Grid Pattern
     grid = Image.new('RGBA', (W, H), (0, 0, 0, 0))
     dgrid = ImageDraw.Draw(grid)
     for x in range(0, W, 60):
@@ -38,65 +55,69 @@ def generate_all():
     canvas = Image.alpha_composite(canvas, grid)
 
     # 4. Fonts
-    font_brand = ImageFont.truetype('segoeuib.ttf', 34)
-    font_badge = ImageFont.truetype('segoeuib.ttf', 13)
-    font_h1 = ImageFont.truetype('segoeuib.ttf', 44)
-    font_sub = ImageFont.truetype('segoeui.ttf', 18)
+    font_brand = ImageFont.truetype('segoeuib.ttf', 32)
+    font_badge = ImageFont.truetype('segoeuib.ttf', 12)
+    font_h1 = ImageFont.truetype('segoeuib.ttf', 38)
+    font_sub = ImageFont.truetype('segoeui.ttf', 16)
     font_stat_val = ImageFont.truetype('segoeuib.ttf', 22)
-    font_stat_lbl = ImageFont.truetype('segoeui.ttf', 13)
-    font_card_head = ImageFont.truetype('segoeuib.ttf', 22)
-    font_card_sub = ImageFont.truetype('segoeui.ttf', 14)
-    font_pill = ImageFont.truetype('segoeuib.ttf', 14)
+    font_stat_lbl = ImageFont.truetype('segoeui.ttf', 12)
+    font_card_head = ImageFont.truetype('segoeuib.ttf', 20)
+    font_card_sub = ImageFont.truetype('segoeui.ttf', 13)
+    font_pill = ImageFont.truetype('segoeuib.ttf', 13)
 
     d = ImageDraw.Draw(canvas)
 
-    # 5. Top Brand Bar: Monogram + Name + Badge
-    mono_h = 38
+    # Safe Left Margin: 80px
+    margin_x = 80
+
+    # 5. Top Brand Bar: Logo + Name + NEXT-GEN Pill Badge
+    mono_h = 36
     mono_w = int(mono_h * (mono.width / mono.height))
     scaled_mono = mono.resize((mono_w, mono_h), Image.Resampling.LANCZOS)
-    canvas.paste(scaled_mono, (80, 65), scaled_mono)
+    canvas.paste(scaled_mono, (margin_x, 65), scaled_mono)
 
-    d.text((80 + mono_w + 14, 65), 'ARSHIO', fill=(255, 255, 255, 255), font=font_brand)
+    d.text((margin_x + mono_w + 14, 65), 'ARSHIO', fill=(255, 255, 255, 255), font=font_brand)
 
-    badge_text = 'DIGITAL PRODUCT AGENCY'
+    # Exact Hero Badge: "● NEXT-GEN TECH & CREATIVE STUDIO"
+    badge_text = '●  NEXT-GEN TECH & CREATIVE STUDIO'
     badge_bbox = d.textbbox((0, 0), badge_text, font=font_badge)
     bw = badge_bbox[2] - badge_bbox[0] + 24
     bh = 28
-    bx = 80 + mono_w + 14 + 160
-    by = 72
-    d.rounded_rectangle([(bx, by), (bx + bw, by + bh)], radius=14, fill=(11, 25, 45, 255), outline=(39, 226, 196, 180), width=1)
+    bx = margin_x + mono_w + 14 + 155
+    by = 70
+    d.rounded_rectangle([(bx, by), (bx + bw, by + bh)], radius=14, fill=(11, 28, 48, 255), outline=(39, 226, 196, 180), width=1)
     d.text((bx + 12, by + 5), badge_text, fill=(39, 226, 196, 255), font=font_badge)
 
-    # Main Headline
-    d.text((80, 160), 'Design-Led Digital Products', fill=(255, 255, 255, 255), font=font_h1)
-    d.text((80, 218), 'That Scale Your Business.', fill=(39, 226, 196, 255), font=font_h1)
+    # 6. EXACT HERO HEADLINE (Clean 2 lines)
+    d.text((margin_x, 155), 'One Dedicated Studio for All Your', fill=(255, 255, 255, 255), font=font_h1)
+    d.text((margin_x, 212), 'Tech & Marketing Needs.', fill=(39, 226, 196, 255), font=font_h1)
 
-    # Subtitle / Capabilities
-    d.text((80, 295), 'Custom ERPs & Software   |   High-Performance Web & Mobile Apps', fill=(210, 225, 245, 240), font=font_sub)
-    d.text((80, 328), 'UI/UX Design Systems   |   High-Impact Video & Motion Reels', fill=(160, 185, 210, 220), font=font_sub)
+    # 7. EXACT HERO SUBTITLE (Clean 2 lines)
+    d.text((margin_x, 285), 'Transforming ideas into high-performing web platforms, intuitive user interfaces,', fill=(210, 225, 245, 240), font=font_sub)
+    d.text((margin_x, 314), 'and scalable marketing funnels. Fast sprints, senior execution, guaranteed momentum.', fill=(160, 185, 215, 220), font=font_sub)
 
-    # Bottom Stats (4 balanced cards that fit cleanly before card on right)
+    # 8. Bottom Stats Cards (Clean 4 cards)
     stats = [
         ('$14M+', 'GMV Driven'),
         ('50+', 'Projects Shipped'),
-        ('4.9/5', 'Client Rating'),
+        ('4.9 / 5', 'Client Rating'),
         ('100%', 'IP Ownership')
     ]
 
-    sx = 80
-    sy = 455
-    sw = 140
+    sx = margin_x
+    sy = 450
+    sw = 135
     sh = 76
     for val, lbl in stats:
         d.rounded_rectangle([(sx, sy), (sx + sw, sy + sh)], radius=14, fill=(11, 20, 42, 220), outline=(255, 255, 255, 30), width=1)
         d.text((sx + 14, sy + 13), val, fill=(39, 226, 196, 255), font=font_stat_val)
         d.text((sx + 14, sy + 44), lbl, fill=(160, 180, 205, 200), font=font_stat_lbl)
-        sx += sw + 14
+        sx += sw + 16
 
-    # 6. Right Side Visual Showcase Card (Glassmorphism Card)
+    # 9. Right Side Visual Showcase Card (Glassmorphism Card)
     card_layer = Image.new('RGBA', (W, H), (0, 0, 0, 0))
     dcard = ImageDraw.Draw(card_layer)
-    cx, cy, cw, ch = 740, 95, 380, 460
+    cx, cy, cw, ch = 780, 88, 345, 465
 
     # Glass card background with border
     dcard.rounded_rectangle([(cx, cy), (cx + cw, cy + ch)], radius=24, fill=(11, 22, 46, 235), outline=(39, 226, 196, 110), width=2)
@@ -108,8 +129,8 @@ def generate_all():
     card_layer.paste(c_scaled_mono, (cx + (cw - c_mono_w)//2, cy + 38), c_scaled_mono)
 
     # Card text
-    dcard.text((cx + 42, cy + 210), 'Built for Scale & Impact', fill=(255, 255, 255, 255), font=font_card_head)
-    dcard.text((cx + 42, cy + 245), 'Senior engineers. Zero lock-in.', fill=(160, 185, 210, 220), font=font_card_sub)
+    dcard.text((cx + 34, cy + 210), 'Built for Scale & Impact', fill=(255, 255, 255, 255), font=font_card_head)
+    dcard.text((cx + 34, cy + 245), 'Senior engineers. Zero lock-in.', fill=(160, 185, 210, 220), font=font_card_sub)
 
     # 3 Feature Pills
     pills = [
@@ -117,10 +138,10 @@ def generate_all():
         '•  Weekly Working Builds',
         '•  Fixed Transparent Scope'
     ]
-    py = cy + 290
+    py = cy + 292
     for p in pills:
-        dcard.rounded_rectangle([(cx + 38, py), (cx + cw - 38, py + 38)], radius=10, fill=(39, 226, 196, 25), outline=(39, 226, 196, 70), width=1)
-        dcard.text((cx + 52, py + 10), p, fill=(240, 255, 252, 245), font=font_pill)
+        dcard.rounded_rectangle([(cx + 28, py), (cx + cw - 28, py + 38)], radius=10, fill=(39, 226, 196, 25), outline=(39, 226, 196, 70), width=1)
+        dcard.text((cx + 40, py + 10), p, fill=(240, 255, 252, 245), font=font_pill)
         py += 46
 
     canvas = Image.alpha_composite(canvas, card_layer)
@@ -130,7 +151,7 @@ def generate_all():
     d_final.rectangle([(0, 0), (W-1, H-1)], outline=(39, 226, 196, 80), width=2)
 
     canvas.convert('RGB').save('public/og-image.png', 'PNG', quality=95)
-    print('Generated public/og-image.png successfully!')
+    print('Generated updated public/og-image.png successfully!')
 
 if __name__ == '__main__':
-    generate_all()
+    generate_og_image()
