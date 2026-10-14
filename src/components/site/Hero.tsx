@@ -65,13 +65,16 @@ const FEATURED_WORKS = [
 ];
 
 const TRUSTED_CLIENTS = [
-  "Omni Apparel",
-  "Apex Supply Chain",
-  "FitPulse Health",
-  "HyperGlow Beverage",
-  "MedFlow Clinics",
-  "CloudScale Tech",
-  "Nexus Analytics",
+  { name: "Omni Apparel Global", sector: "E-Commerce" },
+  { name: "Apex Supply Chain", sector: "Logistics ERP" },
+  { name: "FitPulse Health", sector: "Mobile App" },
+  { name: "HyperGlow Beverage", sector: "3D Motion" },
+  { name: "MedFlow Clinics", sector: "HealthTech" },
+  { name: "CloudScale Tech", sector: "Infrastructure" },
+  { name: "Nexus Analytics", sector: "B2B SaaS" },
+  { name: "ScribeFlow AI", sector: "AI Workflow" },
+  { name: "VitalSync Telehealth", sector: "Health OS" },
+  { name: "Kestrel Capital", sector: "FinTech" },
 ];
 
 export function Hero() {
@@ -324,51 +327,61 @@ export function Hero() {
           </div>
         </motion.div>
 
-        {/* 6. MINIMALIST SOCIAL PROOF & STATS STRIP — Clean, Breathable, Sophisticated */}
+        {/* 6. CLIENT BRAND MARQUEE & KEY AGENCY OUTCOMES */}
         <motion.div
           initial={prefersReduced ? undefined : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-14 pt-10 border-t border-slate-800/80 flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8 text-center lg:text-left"
+          className="mt-16 pt-10 border-t border-slate-800/80"
         >
-          {/* Left: Trusted Client Names Ticker */}
-          <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6">
-            <span className="text-xs font-mono uppercase tracking-wider text-slate-400 whitespace-nowrap">
-              Trusted By Teams At:
-            </span>
-            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-sm font-bold font-display text-slate-300">
-              {TRUSTED_CLIENTS.slice(0, 5).map((client) => (
-                <span
-                  key={client}
-                  className="hover:text-white transition-colors duration-200 cursor-default"
+          {/* Eyebrow Label */}
+          <p className="text-center text-[11px] sm:text-xs font-mono uppercase tracking-[0.2em] text-slate-400 mb-6">
+            Trusted by fast-growing startups & visionary brands
+          </p>
+
+          {/* Infinite Soft Client Marquee */}
+          <div className="relative w-full overflow-hidden py-2 mb-10">
+            {/* Edge Fade Masks */}
+            <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-36 bg-gradient-to-r from-[#070d1e] to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-36 bg-gradient-to-l from-[#070d1e] to-transparent z-10 pointer-events-none" />
+
+            {/* Marquee Track with Pause on Hover */}
+            <div className="flex animate-marquee hover:[animation-play-state:paused] gap-4 items-center">
+              {[...TRUSTED_CLIENTS, ...TRUSTED_CLIENTS].map((client, idx) => (
+                <div
+                  key={`${client.name}-${idx}`}
+                  className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-[#0b132b]/80 border border-slate-800/80 hover:border-[#27e2c4]/50 hover:bg-[#131f37] transition-all duration-300 shrink-0 group cursor-default shadow-sm"
                 >
-                  {client}
-                </span>
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#27e2c4] group-hover:scale-125 transition-transform" />
+                  <span className="text-xs sm:text-sm font-semibold text-slate-200 group-hover:text-white font-display whitespace-nowrap">
+                    {client.name}
+                  </span>
+                  <span className="text-[10px] font-mono text-slate-400 bg-white/5 px-2 py-0.5 rounded uppercase">
+                    {client.sector}
+                  </span>
+                </div>
               ))}
             </div>
           </div>
 
-          {/* Right: Clean, Crisp Inline Outcomes */}
-          <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center gap-4 sm:gap-7 text-xs font-mono text-slate-300 pt-2 lg:pt-0">
-            <div className="flex items-center gap-1.5 justify-center sm:justify-start">
-              <span className="text-sm sm:text-base font-extrabold text-white font-display">$14M+</span>
-              <span className="text-slate-400">GMV Driven</span>
+          {/* Symmetrical 4-Card Stats Grid */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto">
+            <div className="bg-[#0b132b]/70 border border-slate-800/80 rounded-2xl p-4 sm:p-5 text-center backdrop-blur-md hover:border-[#27e2c4]/40 hover:shadow-[0_0_25px_rgba(39,226,196,0.1)] transition-all">
+              <div className="text-2xl sm:text-3xl font-extrabold text-white font-display">$14M+</div>
+              <div className="text-[11px] font-mono text-slate-400 uppercase mt-1 tracking-wider">Client GMV Driven</div>
             </div>
-            <span className="text-slate-700 hidden sm:inline">•</span>
-            <div className="flex items-center gap-1.5 justify-center sm:justify-start">
-              <span className="text-sm sm:text-base font-extrabold text-white font-display">50+</span>
-              <span className="text-slate-400">Shipped</span>
+            <div className="bg-[#0b132b]/70 border border-slate-800/80 rounded-2xl p-4 sm:p-5 text-center backdrop-blur-md hover:border-[#27e2c4]/40 hover:shadow-[0_0_25px_rgba(39,226,196,0.1)] transition-all">
+              <div className="text-2xl sm:text-3xl font-extrabold text-[#27e2c4] font-display">50+</div>
+              <div className="text-[11px] font-mono text-slate-400 uppercase mt-1 tracking-wider">Products Shipped</div>
             </div>
-            <span className="text-slate-700 hidden sm:inline">•</span>
-            <div className="flex items-center gap-1.5 justify-center sm:justify-start">
-              <span className="text-sm sm:text-base font-extrabold text-[#27e2c4] font-display">4.9/5</span>
-              <span className="text-slate-400">Rating</span>
+            <div className="bg-[#0b132b]/70 border border-slate-800/80 rounded-2xl p-4 sm:p-5 text-center backdrop-blur-md hover:border-[#27e2c4]/40 hover:shadow-[0_0_25px_rgba(39,226,196,0.1)] transition-all">
+              <div className="text-2xl sm:text-3xl font-extrabold text-sky-400 font-display">4.9 / 5.0</div>
+              <div className="text-[11px] font-mono text-slate-400 uppercase mt-1 tracking-wider">Average Rating</div>
             </div>
-            <span className="text-slate-700 hidden sm:inline">•</span>
-            <div className="flex items-center gap-1.5 justify-center sm:justify-start">
-              <span className="text-sm sm:text-base font-extrabold text-sky-400 font-display">100%</span>
-              <span className="text-slate-400">IP Owned</span>
+            <div className="bg-[#0b132b]/70 border border-slate-800/80 rounded-2xl p-4 sm:p-5 text-center backdrop-blur-md hover:border-[#27e2c4]/40 hover:shadow-[0_0_25px_rgba(39,226,196,0.1)] transition-all">
+              <div className="text-2xl sm:text-3xl font-extrabold text-amber-300 font-display">100%</div>
+              <div className="text-[11px] font-mono text-slate-400 uppercase mt-1 tracking-wider">IP Ownership</div>
             </div>
           </div>
         </motion.div>
