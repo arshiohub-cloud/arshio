@@ -137,6 +137,21 @@ export function PortfolioShowcase({ isPreview = false }: { isPreview?: boolean }
                   transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                   className="group relative bg-[#0b132b] rounded-3xl border border-slate-800/80 overflow-hidden hover:border-[#27e2c4]/40 transition-colors duration-300 shadow-xl flex flex-col justify-between"
                 >
+                  {/* Studio Window Chrome Bar */}
+                  <div className="flex items-center justify-between px-4 py-2.5 bg-[#070d1e] border-b border-slate-800/80 select-none">
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-2.5 h-2.5 rounded-full bg-slate-700/80 inline-block" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-slate-700/80 inline-block" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-slate-700/80 inline-block" />
+                    </div>
+                    <span className="text-[11px] font-mono text-slate-400 truncate max-w-[220px]">
+                      {item.id}.arshio.dev
+                    </span>
+                    <span className="text-[10px] font-mono font-semibold text-[#27e2c4] bg-[#27e2c4]/10 px-2 py-0.5 rounded border border-[#27e2c4]/20">
+                      Production
+                    </span>
+                  </div>
+
                   {/* Media Container */}
                   <div className="relative aspect-video w-full overflow-hidden bg-[#131f37]">
                     {/* Interactive Before / After Slider if provided */}
