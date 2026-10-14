@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
-import { PROJECTS, ProjectCategory, ProjectItem } from "@/data/projects";
+import { ProjectCategory, ProjectItem } from "@/data/projects";
+import { usePortfolioProjects } from "@/lib/projects-store";
 import { Play, ArrowRight, Sparkles, X, CheckCircle2, Layers, ExternalLink } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
@@ -15,6 +16,7 @@ const CATEGORIES: ProjectCategory[] = [
 ];
 
 export function PortfolioShowcase({ isPreview = false }: { isPreview?: boolean }) {
+  const [projects] = usePortfolioProjects();
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>("All");
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
   const [activeCaseStudy, setActiveCaseStudy] = useState<ProjectItem | null>(null);
@@ -22,7 +24,7 @@ export function PortfolioShowcase({ isPreview = false }: { isPreview?: boolean }
   const filterContainerRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
-  const filteredProjects = PROJECTS.filter(
+  const filteredProjects = projects.filter(
     (p) => activeCategory === "All" || p.category === activeCategory
   );
 

@@ -196,6 +196,45 @@ function Dashboard() {
         </AdminCard>
       </div>
 
+      {/* Quick Action Portals: Page Sections CMS & Portfolio CRUD */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+        <Link
+          to="/admin/settings"
+          className="p-5 rounded-2xl bg-gradient-to-br from-[#0b132b] to-[#070d1e] border border-slate-800 hover:border-[#27e2c4]/40 transition group flex items-start gap-4"
+        >
+          <div className="w-11 h-11 rounded-xl bg-[#27e2c4]/10 border border-[#27e2c4]/30 text-[#27e2c4] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+            <Sparkles className="w-5 h-5" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="font-bold text-white text-sm">Customize Page Sections (Hero, Services, Why Us)</span>
+              <ArrowUpRight className="w-4 h-4 text-[#27e2c4] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </div>
+            <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+              Edit hero headlines, badges, subtitles, call-to-actions, and manifesto text without editing code.
+            </p>
+          </div>
+        </Link>
+
+        <Link
+          to="/admin/settings"
+          className="p-5 rounded-2xl bg-gradient-to-br from-[#0b132b] to-[#070d1e] border border-slate-800 hover:border-cyan-500/40 transition group flex items-start gap-4"
+        >
+          <div className="w-11 h-11 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+            <Layers className="w-5 h-5" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="font-bold text-white text-sm">Portfolio Projects Manager (Full CRUD)</span>
+              <ArrowUpRight className="w-4 h-4 text-cyan-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </div>
+            <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+              Add new projects, edit titles, clients, metrics, images, or delete existing portfolio case studies.
+            </p>
+          </div>
+        </Link>
+      </div>
+
       {/* Main Grid: Recent Inquiries + Agency Live Controller */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left Column: Recent Inquiries Feed (2 Cols) */}

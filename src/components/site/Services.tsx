@@ -2,8 +2,12 @@ import { ArrowRight, Check, Sparkles, TrendingUp, Cpu, Zap, Layout, Video } from
 import { useFadeIn } from "@/hooks/use-fade-in";
 import { SERVICES } from "@/data/services";
 import { Link } from "@tanstack/react-router";
+import { useSiteSettings } from "@/lib/cms-store";
 
 export function Services() {
+  const [settings] = useSiteSettings();
+  const sec = settings.servicesSection;
+
   return (
     <section
       id="services"
@@ -22,16 +26,16 @@ export function Services() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         <header className="max-w-3xl mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#27e2c4]/30 bg-[#27e2c4]/10 text-[#27e2c4] text-xs font-semibold uppercase tracking-wider mb-4 font-mono">
-            <Sparkles className="w-3.5 h-3.5" /> Six Specialized Capabilities
+            <Sparkles className="w-3.5 h-3.5" /> {sec.badge || "Six Specialized Capabilities"}
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
-            High-Impact Engineering & Creative Services{" "}
+            {sec.title || "High-Impact Engineering & Creative Services"}{" "}
             <span className="bg-gradient-to-r from-[#27e2c4] via-[#5eead4] to-[#38bdf8] bg-clip-text text-transparent">
-              Under One Roof.
+              {sec.titleAccent || "Under One Roof."}
             </span>
           </h2>
           <p className="mt-4 text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl">
-            From initial system architecture and dark-mode Figma prototypes to scalable cloud deployment and algorithm-optimized video reels.
+            {sec.subtitle || "From initial system architecture and dark-mode Figma prototypes to scalable cloud deployment and algorithm-optimized video reels."}
           </p>
         </header>
 

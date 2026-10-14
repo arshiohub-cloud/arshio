@@ -1,7 +1,11 @@
 import { ArrowRight, Code2, Layers, Cpu, CheckCircle2, ShieldCheck } from "lucide-react";
 import { Link } from "@tanstack/react-router";
+import { useSiteSettings } from "@/lib/cms-store";
 
 export function Hero() {
+  const [settings] = useSiteSettings();
+  const hero = settings.hero;
+
   return (
     <section className="relative overflow-hidden bg-transparent text-white pt-16 sm:pt-24 pb-20 sm:pb-28 border-b border-white/5">
       {/* Brand Ambient Glow Effects */}
@@ -15,35 +19,35 @@ export function Hero() {
         {/* Confident Technical Studio Pill */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#27e2c4]/30 bg-[#27e2c4]/10 backdrop-blur-md text-[11px] sm:text-xs font-mono font-semibold text-[#27e2c4] mb-6 sm:mb-8 shadow-sm">
           <span className="h-1.5 w-1.5 rounded-full bg-[#27e2c4] animate-pulse" />
-          <span>SENIOR FULL-CYCLE DIGITAL STUDIO</span>
+          <span>{hero.badge || "SENIOR FULL-CYCLE DIGITAL STUDIO"}</span>
         </div>
 
         {/* Main Bold Headline */}
         <h1 className="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] text-white max-w-5xl mx-auto">
-          Design-Led Digital Products That <br className="hidden sm:inline" />
+          {hero.title} <br className="hidden sm:inline" />
           <span className="bg-gradient-to-r from-[#27e2c4] via-[#5eead4] to-[#38bdf8] bg-clip-text text-transparent">
-            Scale Your Business Fast.
+            {hero.titleAccent}
           </span>
         </h1>
 
         {/* Human, Compelling Subtitle */}
         <p className="mt-6 text-base sm:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
-          We engineer bespoke ERP software, high-converting web applications, mobile apps, and viral motion reels. Senior talent, fixed sprint pricing, zero agency fluff.
+          {hero.subtitle}
         </p>
 
         {/* Clear Action Buttons */}
         <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto">
           <Link
-            to="/contact"
+            to={hero.primaryBtnLink as any || "/contact"}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-sm sm:text-base font-bold text-slate-950 bg-[#27e2c4] hover:bg-[#1fd6b9] px-8 py-4 rounded-xl shadow-xl shadow-[#27e2c4]/25 transition-all hover:scale-105 active:scale-95"
           >
-            Start Your Project <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+            {hero.primaryBtnText || "Start Your Project"} <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
           </Link>
           <Link
-            to="/portfolio"
+            to={hero.secondaryBtnLink as any || "/portfolio"}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-sm sm:text-base font-semibold text-white bg-[#131f37] hover:bg-[#1a2948] border border-slate-800 px-7 py-4 rounded-xl transition-all"
           >
-            Explore Case Studies
+            {hero.secondaryBtnText || "Explore Case Studies"}
           </Link>
         </div>
 
@@ -58,13 +62,13 @@ export function Hero() {
                 <span className="h-3 w-3 rounded-full bg-emerald-500/80 inline-block" />
                 <div className="ml-3 hidden sm:flex items-center gap-2 px-3 py-1 rounded-md bg-[#131f37] border border-slate-800 text-[11px] font-mono text-slate-400">
                   <span className="text-[#27e2c4]">https://</span>
-                  <span>app.arshio.dev/operations-dashboard</span>
+                  <span>{hero.mockupUrl || "app.arshio.dev/operations-dashboard"}</span>
                 </div>
               </div>
 
               <div className="flex items-center gap-3">
                 <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-mono font-semibold text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping" /> Live Engine: 99.98%
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping" /> {hero.mockupStatus || "Live Engine: 99.98%"}
                 </span>
                 <span className="hidden sm:inline-block text-[11px] font-mono text-slate-400">
                   v2.4 Production

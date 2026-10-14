@@ -1,4 +1,5 @@
 import { ShieldCheck, Clock, Users, Lock, Award, CheckCircle2 } from "lucide-react";
+import { useSiteSettings } from "@/lib/cms-store";
 
 const DIFFERENTIATORS = [
   {
@@ -28,6 +29,9 @@ const DIFFERENTIATORS = [
 ];
 
 export function WhyChooseUs() {
+  const [settings] = useSiteSettings();
+  const sec = settings.whyChooseUsSection;
+
   return (
     <section className="py-20 sm:py-28 bg-transparent border-b border-white/5 relative overflow-hidden">
       {/* Background Glow */}
@@ -38,19 +42,18 @@ export function WhyChooseUs() {
           {/* Left: Bold Editorial Statement (Sticky on Desktop) */}
           <div className="lg:col-span-5 lg:sticky lg:top-28 space-y-6">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#27e2c4]/30 bg-[#27e2c4]/10 text-[#27e2c4] text-xs font-mono font-semibold uppercase tracking-wider">
-              <ShieldCheck className="w-3.5 h-3.5" /> Built for Discerning Founders
+              <ShieldCheck className="w-3.5 h-3.5" /> {sec.badge || "Built for Discerning Founders"}
             </div>
 
             <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-[1.12]">
-              Senior Talent. <br />
-              Direct Access. <br />
+              {sec.title || "Senior Talent. Direct Access."} <br />
               <span className="bg-gradient-to-r from-[#27e2c4] via-[#5eead4] to-[#38bdf8] bg-clip-text text-transparent">
-                Zero Lock-In.
+                {sec.titleAccent || "Zero Lock-In."}
               </span>
             </h2>
 
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-              We are not a faceless outsourcing body shop, and we don’t pad meetings with layers of non-technical account managers. We are a tight collective of senior engineers, product designers, and growth directors who treat your business like our own.
+              {sec.subtitle || "We are not a faceless outsourcing body shop, and we don’t pad meetings with layers of non-technical account managers. We are a tight collective of senior engineers, product designers, and growth directors who treat your business like our own."}
             </p>
 
             <div className="p-5 rounded-2xl bg-[#0b132b] border border-slate-800 space-y-3">

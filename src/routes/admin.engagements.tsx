@@ -104,13 +104,22 @@ function EngagementsPage() {
           </p>
         </div>
 
-        <button
-          onClick={() => setShowCreateModal(true)}
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#27e2c4] text-[#070d1e] text-xs font-bold hover:bg-[#27e2c4]/90 transition shadow-[0_0_20px_rgba(39,226,196,0.25)]"
-        >
-          <Plus className="w-4 h-4" />
-          <span>New Client Engagement</span>
-        </button>
+        <div className="flex items-center gap-3">
+          <Link
+            to="/admin/settings"
+            className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-[#0b132b] border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 text-xs font-semibold transition"
+          >
+            <span>Public Portfolio (CRUD)</span>
+            <ArrowRight className="w-3.5 h-3.5 text-[#27e2c4]" />
+          </Link>
+          <button
+            onClick={() => setShowCreateModal(true)}
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#27e2c4] text-[#070d1e] text-xs font-bold hover:bg-[#27e2c4]/90 transition shadow-[0_0_20px_rgba(39,226,196,0.25)]"
+          >
+            <Plus className="w-4 h-4" />
+            <span>New Client Engagement</span>
+          </button>
+        </div>
       </div>
 
       {/* Projects List */}

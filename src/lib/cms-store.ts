@@ -22,6 +22,46 @@ export type SiteSettings = {
     linkText: string;
     linkUrl: string;
   };
+  // Page Sections CMS
+  hero: {
+    badge: string;
+    title: string;
+    titleAccent: string;
+    subtitle: string;
+    primaryBtnText: string;
+    primaryBtnLink: string;
+    secondaryBtnText: string;
+    secondaryBtnLink: string;
+    mockupUrl: string;
+    mockupStatus: string;
+    mockupLatency: string;
+  };
+  servicesSection: {
+    badge: string;
+    title: string;
+    titleAccent: string;
+    subtitle: string;
+  };
+  whyChooseUsSection: {
+    badge: string;
+    title: string;
+    titleAccent: string;
+    subtitle: string;
+    guarantee: string;
+  };
+  aboutPage: {
+    badge: string;
+    title: string;
+    titleAccent: string;
+    subtitle: string;
+    manifesto: string;
+  };
+  pricingSection: {
+    badge: string;
+    title: string;
+    titleAccent: string;
+    subtitle: string;
+  };
 };
 
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
@@ -46,9 +86,51 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
     linkText: "Book Discovery Call",
     linkUrl: "/contact",
   },
+  hero: {
+    badge: "SENIOR FULL-CYCLE DIGITAL STUDIO",
+    title: "Design-Led Digital Products That",
+    titleAccent: "Scale Your Business Fast.",
+    subtitle:
+      "We engineer bespoke ERP software, high-converting web applications, mobile apps, and viral motion reels. Senior talent, fixed sprint pricing, zero agency fluff.",
+    primaryBtnText: "Start Your Project",
+    primaryBtnLink: "/contact",
+    secondaryBtnText: "Explore Case Studies",
+    secondaryBtnLink: "/portfolio",
+    mockupUrl: "app.arshio.dev/operations-dashboard",
+    mockupStatus: "Live Engine: 99.98%",
+    mockupLatency: "0.58s Global Average",
+  },
+  servicesSection: {
+    badge: "OUR CORE CAPABILITIES",
+    title: "High-Impact Digital Disciplines,",
+    titleAccent: "Built to Scale.",
+    subtitle:
+      "From enterprise cloud ERP to high-converting mobile apps and viral motion reels. Every discipline under one roof.",
+  },
+  whyChooseUsSection: {
+    badge: "BUILT FOR DISCERNING FOUNDERS",
+    title: "Senior Talent. Direct Access.",
+    titleAccent: "Zero Lock-In.",
+    subtitle:
+      "We are not a faceless outsourcing body shop, and we don’t pad meetings with layers of non-technical account managers. We are a tight collective of senior engineers, product designers, and growth directors.",
+    guarantee: "100% Commercial IP Ownership, Zero Proprietary Lock-In, and 30-Day Post-Launch SLA Warranty.",
+  },
+  aboutPage: {
+    badge: "WHO WE ARE",
+    title: "Crafting High-Performance Products",
+    titleAccent: "With Zero Bloat.",
+    subtitle: "We partner with ambitious startups and established enterprises to engineer high-velocity digital solutions.",
+    manifesto: "We believe true software craft requires direct collaboration between senior builders and founders. No unnecessary layers, no inflated retainers.",
+  },
+  pricingSection: {
+    badge: "TRANSPARENT VALUE",
+    title: "Simple, Predictable Engagement Models",
+    titleAccent: "With Zero Hidden Fees.",
+    subtitle: "Transparent milestone pricing with fixed deliverables and 100% IP ownership.",
+  },
 };
 
-const STORAGE_KEY = "arshio_site_cms_settings_v1";
+const STORAGE_KEY = "arshio_site_cms_settings_v2";
 
 // In-memory cache + listeners for multi-component reactivity
 let currentSettings: SiteSettings = { ...DEFAULT_SITE_SETTINGS };
@@ -60,7 +142,16 @@ function initSettings() {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
       const parsed = JSON.parse(raw);
-      currentSettings = { ...DEFAULT_SITE_SETTINGS, ...parsed };
+      currentSettings = {
+        ...DEFAULT_SITE_SETTINGS,
+        ...parsed,
+        hero: { ...DEFAULT_SITE_SETTINGS.hero, ...(parsed.hero || {}) },
+        servicesSection: { ...DEFAULT_SITE_SETTINGS.servicesSection, ...(parsed.servicesSection || {}) },
+        whyChooseUsSection: { ...DEFAULT_SITE_SETTINGS.whyChooseUsSection, ...(parsed.whyChooseUsSection || {}) },
+        aboutPage: { ...DEFAULT_SITE_SETTINGS.aboutPage, ...(parsed.aboutPage || {}) },
+        pricingSection: { ...DEFAULT_SITE_SETTINGS.pricingSection, ...(parsed.pricingSection || {}) },
+        stats: { ...DEFAULT_SITE_SETTINGS.stats, ...(parsed.stats || {}) },
+      };
     }
   } catch (e) {
     console.error("Failed to load settings from storage:", e);
@@ -75,7 +166,15 @@ export function getSiteSettings(): SiteSettings {
 }
 
 export function saveSiteSettings(newSettings: Partial<SiteSettings>): SiteSettings {
-  currentSettings = { ...currentSettings, ...newSettings };
+  currentSettings = {
+    ...currentSettings,
+    ...newSettings,
+    hero: { ...currentSettings.hero, ...(newSettings.hero || {}) },
+    servicesSection: { ...currentSettings.servicesSection, ...(newSettings.servicesSection || {}) },
+    whyChooseUsSection: { ...currentSettings.whyChooseUsSection, ...(newSettings.whyChooseUsSection || {}) },
+    aboutPage: { ...currentSettings.aboutPage, ...(newSettings.aboutPage || {}) },
+    pricingSection: { ...currentSettings.pricingSection, ...(newSettings.pricingSection || {}) },
+  };
   if (typeof window !== "undefined") {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(currentSettings));
@@ -104,9 +203,7 @@ export function useSiteSettings(): [SiteSettings, (newSettings: Partial<SiteSett
           const parsed = JSON.parse(e.newValue);
           currentSettings = { ...DEFAULT_SITE_SETTINGS, ...parsed };
           setSettings(currentSettings);
-        } catch {
-          // ignore
-        }
+        } catch {}
       }
     };
 
