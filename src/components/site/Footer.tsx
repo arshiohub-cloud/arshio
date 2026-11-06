@@ -27,10 +27,14 @@ export function Footer() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
             {/* Col 1: Brand */}
             <div className="sm:col-span-2 lg:col-span-1">
-              <Link to="/" className="inline-block">
-                <span className="text-2xl font-extrabold font-display text-white">
-                  arshio
-                </span>
+              <Link to="/" className="inline-block group" aria-label="Arshio Home">
+                <img
+                  src="/arshio-logo.png?v=2"
+                  alt="Arshio"
+                  width={140}
+                  height={44}
+                  className="h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                />
               </Link>
               <p className="mt-4 text-sm text-white/50 leading-relaxed max-w-xs">
                 Design-led digital products that scale your business. Senior talent,

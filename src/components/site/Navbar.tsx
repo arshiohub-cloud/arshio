@@ -38,11 +38,13 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between gap-4">
         {/* Left: Official Arshio Brand Logo */}
         <div className="flex-1 flex items-center justify-start">
-          <Link to="/" className="flex items-center group py-2" aria-label="Arshio Home">
+          <Link to="/" className="flex items-center group py-1.5" aria-label="Arshio Home">
             <img
-              src="/arshio-logo.png"
+              src="/arshio-logo.png?v=2"
               alt="Arshio Creative Agency"
-              className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-[0_0_12px_rgba(39,226,196,0.2)]"
+              width={160}
+              height={50}
+              className="h-10 sm:h-11 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-[0_0_16px_rgba(39,226,196,0.25)]"
             />
           </Link>
         </div>
